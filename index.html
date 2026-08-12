@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FMX AI Hackathon — Oct 20</title>
+<meta name="description" content="FMX AI Hackathon — 100 participants, two tracks, one morning. October 20, 8:00 AM – 12:00 PM. Awards at 4:30 PM.">
+<script>
+document.documentElement.setAttribute('data-theme',
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+</script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  /* ---- DARK (default) ---- */
+  --bg:#07070d;
+  --bg-2:#0c0c17;
+  --solid:#0a0a14;
+  --nav-bg:rgba(7,7,13,.72);
+  --tint:255,255,255;
+  --panel:rgba(var(--tint),.035);
+  --panel-2:rgba(var(--tint),.055);
+  --panel-grad:linear-gradient(180deg,rgba(var(--tint),.05),rgba(var(--tint),.018));
+  --line:rgba(var(--tint),.10);
+  --line-2:rgba(var(--tint),.18);
+  --grid-line:rgba(var(--tint),.022);
+  --ink:#f2f3f8;
+  --ink-2:#a8adc0;
+  --ink-3:#71768a;
+  --c1:#00e5ff;
+  --c2:#7c5cff;
+  --c3:#ff3d81;
+  --c3s:var(--c3s);
+  --c4:#4ade80;
+  --amber:#ffb020;
+  --grad:linear-gradient(100deg,var(--c1),var(--c2) 55%,var(--c3));
+  --on-grad:#06060c;
+  --g1:color-mix(in srgb, var(--c1) 16%, transparent);
+  --g2:rgba(124,92,255,.20);
+  --g3:rgba(255,61,129,.12);
+  --btn-shadow:0 10px 34px -10px rgba(124,92,255,.85);
+  --btn-shadow-h:0 16px 42px -12px rgba(124,92,255,1);
+  --mark-glow:0 0 24px rgba(124,92,255,.55);
+  --av-shadow:0 8px 24px -8px rgba(0,0,0,.8);
+  --radius:16px;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1120px;
+}
+:root[data-theme="light"]{
+  --bg:#ffffff;
+  --bg-2:#f7f8fc;
+  --solid:#ffffff;
+  --nav-bg:rgba(255,255,255,.84);
+  --tint:15,23,42;
+  --panel:rgba(var(--tint),.030);
+  --panel-2:rgba(var(--tint),.058);
+  --panel-grad:linear-gradient(180deg,rgba(var(--tint),.045),rgba(var(--tint),.012));
+  --line:rgba(var(--tint),.12);
+  --line-2:rgba(var(--tint),.22);
+  --grid-line:rgba(15,23,42,.030);
+  --ink:#0d1220;
+  --ink-2:#4d5566;
+  --ink-3:#7d8496;
+  --c1:#0b7d95;
+  --c2:#6d28d9;
+  --c3:#c01458;
+  --c3s:#be185d;
+  --c4:#15803d;
+  --amber:#a86200;
+  --grad:linear-gradient(100deg,#0891b2,#6d28d9 55%,#be185d);
+  --on-grad:#ffffff;
+  --g1:rgba(6,182,212,.10);
+  --g2:rgba(124,92,255,.11);
+  --g3:rgba(244,63,94,.07);
+  --btn-shadow:0 10px 28px -12px rgba(109,40,217,.55);
+  --btn-shadow-h:0 16px 36px -14px rgba(109,40,217,.7);
+  --mark-glow:0 6px 18px -6px rgba(109,40,217,.5);
+  --av-shadow:0 8px 22px -10px rgba(15,23,42,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+/* ambient glow field */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 12% -8%, var(--g1), transparent 60%),
+    radial-gradient(760px 520px at 88% 4%, var(--g2), transparent 62%),
+    radial-gradient(700px 460px at 60% 100%, var(--g3), transparent 60%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 20%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 20%,#000 0%,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ============ NAV ============ */
+header.nav{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  background:var(--nav-bg);border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer;text-decoration:none;color:inherit;flex-shrink:0}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--grad);display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:13px;color:var(--on-grad);letter-spacing:-.5px;
+  box-shadow:var(--mark-glow)}
+.brand b{font-size:15px;letter-spacing:-.2px;font-weight:700}
+.brand span{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-top:-2px}
+nav.links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+nav.links a{
+  font-size:13.5px;color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:9px;
+  transition:.16s;white-space:nowrap;font-weight:500;
+}
+nav.links a:hover{color:var(--ink);background:var(--panel-2)}
+nav.links a.on{color:var(--on-grad);background:linear-gradient(100deg,var(--c1),var(--c2));font-weight:650}
+.tt{background:var(--panel);border:1px solid var(--line);color:var(--ink-2);width:36px;height:36px;
+  border-radius:10px;cursor:pointer;display:grid;place-items:center;transition:.16s;flex-shrink:0;
+  margin-left:10px;font-size:0;padding:0}
+.tt:hover{color:var(--c1);border-color:var(--line-2);background:var(--panel-2)}
+.tt svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tt .moon{display:none}
+:root[data-theme="light"] .tt .sun{display:none}
+:root[data-theme="light"] .tt .moon{display:block}
+.burger{display:none;margin-left:auto;background:var(--panel);border:1px solid var(--line);
+  color:var(--ink);width:40px;height:36px;border-radius:10px;font-size:16px;cursor:pointer;line-height:1}
+@media(max-width:940px){
+  .nav-in{flex-wrap:wrap}
+  .burger{display:block;margin-left:8px}
+  .tt{margin-left:auto;order:1}
+  .burger{order:2}
+  nav.links{display:none;order:3;width:100%;margin-left:0;flex-direction:column;gap:2px;padding-top:10px;border-top:1px solid var(--line);margin-top:10px}
+  nav.links.open{display:flex}
+  nav.links a{padding:11px 12px;font-size:15px}
+}
+
+/* ============ PAGES ============ */
+.page{display:none;animation:in .38s cubic-bezier(.2,.7,.3,1)}
+.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.sec{padding-block:66px}
+.sec-sm{padding-block:40px 66px}
+
+/* page header */
+.phead{padding-block:62px 12px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c1);
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--c1);opacity:.7}
+h1{font-size:clamp(34px,5.4vw,58px);line-height:1.03;letter-spacing:-.035em;margin:0 0 16px;font-weight:800}
+h2{font-size:clamp(24px,3.2vw,34px);line-height:1.14;letter-spacing:-.025em;margin:0 0 14px;font-weight:750}
+h3{font-size:19px;letter-spacing:-.015em;margin:0 0 8px;font-weight:700}
+h4{font-size:15px;margin:0 0 6px;font-weight:700}
+p{margin:0 0 14px;color:var(--ink-2)}
+.lead{font-size:18.5px;color:var(--ink-2);max-width:74ch}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ============ HERO ============ */
+.hero{padding-block:86px 56px;position:relative}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  border:1px solid var(--line-2);border-radius:100px;padding:6px 13px;color:var(--ink-2);background:var(--panel)}
+.pill.live{border-color:color-mix(in srgb, var(--c1) 45%, transparent);color:var(--c1);background:color-mix(in srgb, var(--c1) 9%, transparent)}
+.pill.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c1);
+  margin-right:7px;vertical-align:1px;box-shadow:0 0 10px var(--c1);animation:pulse 1.9s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(42px,8.2vw,86px);max-width:16ch}
+.hero .lead{font-size:20px;max-width:60ch;margin-top:20px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-weight:650;
+  font-size:14.5px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.18s;font-family:var(--sans)}
+.btn-p{background:var(--grad);color:var(--on-grad);box-shadow:var(--btn-shadow)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:var(--btn-shadow-h)}
+.btn-s{background:var(--panel);border-color:var(--line-2);color:var(--ink)}
+.btn-s:hover{background:var(--panel-2);border-color:rgba(var(--tint),.32);transform:translateY(-2px)}
+
+/* countdown / facts strip */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:52px}
+.fact{background:var(--solid);padding:22px 20px}
+.fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.fact .v{font-size:23px;font-weight:750;letter-spacing:-.02em;line-height:1.15}
+.fact .v small{display:block;font-size:12.5px;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-top:3px}
+@media(max-width:780px){.facts{grid-template-columns:1fr}}
+
+/* ============ CARDS ============ */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.2s}
+.card:hover{border-color:var(--line-2);background:var(--panel-2)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* track cards */
+.track{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(var(--tint),.05),rgba(var(--tint),.018));padding:34px;transition:.22s}
+.track:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.track::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--tg)}
+.track .no{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
+.track h3{font-size:26px;margin:10px 0 12px;letter-spacing:-.03em}
+.track .hmw{font-size:16px;color:var(--ink);font-weight:550;border-left:2px solid;padding-left:14px;margin:18px 0;line-height:1.5}
+.t1{--tg:linear-gradient(90deg,var(--c1),var(--c2))}
+.t1 .hmw{border-color:var(--c1)}
+.t2{--tg:linear-gradient(90deg,var(--c3),var(--amber))}
+.t2 .hmw{border-color:var(--c3)}
+.chal{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:9px}
+.chal li{position:relative;padding-left:24px;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.chal li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:2px;background:var(--c1);opacity:.85}
+.t2 .chal li::before{background:var(--c3)}
+.strong-note{margin-top:22px;padding:16px 18px;border-radius:12px;background:rgba(var(--tint),.04);
+  border:1px solid var(--line);font-size:14.5px;color:var(--ink-2)}
+.strong-note b{color:var(--ink);display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;margin-bottom:6px;color:var(--c4)}
+
+/* ============ SCHEDULE ============ */
+.timeline{position:relative;margin-top:36px;padding-left:0}
+.slot{display:grid;grid-template-columns:132px 1fr;gap:22px;position:relative;padding:0 0 8px}
+.slot .time{font-family:var(--mono);font-size:13px;color:var(--ink);padding-top:20px;text-align:right;font-weight:600;letter-spacing:-.02em}
+.slot .time small{display:block;color:var(--ink-3);font-size:11px;font-weight:400;letter-spacing:.08em;margin-top:2px}
+.slot .body{border-left:1px solid var(--line);padding:20px 0 26px 26px;position:relative}
+.slot:last-child .body{border-left-color:transparent}
+.slot .body::before{content:"";position:absolute;left:-5.5px;top:24px;width:10px;height:10px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--c2);box-shadow:0 0 0 3px color-mix(in srgb, var(--c2) 16%, transparent)}
+.slot.key .body::before{background:var(--c1);border-color:var(--c1);box-shadow:0 0 14px var(--c1),0 0 0 4px color-mix(in srgb, var(--c1) 16%, transparent)}
+.slot h4{font-size:16.5px;margin-bottom:5px}
+.slot p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:3px 8px;border-radius:5px;margin-left:9px;vertical-align:2px;font-weight:600}
+.tag.hard{background:color-mix(in srgb, var(--c3) 14%, transparent);color:var(--c3s);border:1px solid color-mix(in srgb, var(--c3) 35%, transparent)}
+.tag.mentor{background:color-mix(in srgb, var(--c1) 13%, transparent);color:var(--c1);border:1px solid color-mix(in srgb, var(--c1) 30%, transparent)}
+.tag.build{background:color-mix(in srgb, var(--c4) 13%, transparent);color:var(--c4);border:1px solid color-mix(in srgb, var(--c4) 32%, transparent)}
+@media(max-width:640px){
+  .slot{grid-template-columns:1fr;gap:0}
+  .slot .time{text-align:left;padding:14px 0 0;display:flex;gap:10px;align-items:baseline}
+  .slot .time small{margin:0}
+  .slot .body{padding:8px 0 24px 20px;margin-left:4px}
+  .slot .body::before{top:12px}
+}
+
+/* ============ STEPS ============ */
+.steps{counter-reset:s;display:grid;gap:16px;margin-top:30px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:13px;
+  font-weight:700;color:var(--on-grad);background:var(--grad);width:34px;height:34px;border-radius:9px;display:grid;place-items:center}
+.step p:last-child{margin-bottom:0}
+.step ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+.step ul li{margin-bottom:5px}
+
+/* ============ TABLE / RUBRIC ============ */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);margin-top:26px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+thead th{background:rgba(var(--tint),.05);text-align:left;padding:14px 16px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--line);font-weight:600}
+tbody td{padding:16px;border-bottom:1px solid rgba(var(--tint),.06);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(var(--tint),.022)}
+td.crit{color:var(--ink);font-weight:650;width:230px}
+td.crit small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:4px;line-height:1.45}
+td.pts{font-family:var(--mono);font-weight:700;color:var(--c1);width:74px;font-size:15px}
+.total-row td{background:color-mix(in srgb, var(--c1) 7%, transparent);color:var(--ink);font-weight:700}
+.total-row td.pts{color:var(--c1);font-size:17px}
+
+/* score bands */
+.bands{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.band{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel)}
+.band .n{font-family:var(--mono);font-size:22px;font-weight:700;letter-spacing:-.03em}
+.band .l{font-size:12px;font-family:var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:4px 0 8px}
+.band p{font-size:13px;margin:0;line-height:1.5}
+.b4 .n{color:var(--c4)} .b3 .n{color:var(--c1)} .b2 .n{color:var(--amber)} .b1 .n{color:var(--ink-3)}
+@media(max-width:800px){.bands{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ MENTORS ============ */
+.mentors{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:34px}
+.m{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
+.m{display:flex;flex-direction:column}
+.m:hover{transform:translateY(-4px);border-color:var(--line-2);background:var(--panel-2)}
+.m .av{width:66px;height:66px;border-radius:14px;margin-bottom:15px;display:block;box-shadow:var(--av-shadow)}
+.m .nm{font-size:16.5px;font-weight:700;letter-spacing:-.02em;margin-bottom:2px}
+.m .nm a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2);transition:.16s}
+.m .nm a:hover{color:var(--c1);border-color:var(--c1)}
+.m .rl{font-size:12.5px;color:var(--c1);font-family:var(--mono);letter-spacing:.02em;margin-bottom:11px;line-height:1.4}
+.m .bl{font-size:13.6px;color:var(--ink-2);line-height:1.55;margin:0 0 13px}
+.m .tags{display:flex;flex-wrap:wrap;gap:6px}
+.m .tags span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 8px;border-radius:6px;background:rgba(var(--tint),.055);border:1px solid var(--line);color:var(--ink-3)}
+.m .tags span.tk1{color:var(--c1);border-color:color-mix(in srgb, var(--c1) 30%, transparent);background:color-mix(in srgb, var(--c1) 9%, transparent)}
+.m.pending .rl{color:var(--ink-3)}
+.m.pending .bl{color:var(--ink-3)}
+.m.tba{border-style:dashed;background:transparent}
+.m.tba:hover{transform:none;background:var(--panel)}
+.m.tba .av{opacity:.55}
+.m.tba .nm{color:var(--ink-2)}
+.m .tags span.tbc{border-style:dashed;color:var(--ink-3)}
+.m .tags span.tk2{color:var(--c3s);border-color:color-mix(in srgb, var(--c3) 30%, transparent);background:color-mix(in srgb, var(--c3) 9%, transparent)}
+
+/* ============ PRIZES ============ */
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.pz{position:relative;border-radius:18px;padding:30px 26px;border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(var(--tint),.055),rgba(var(--tint),.015));text-align:center;overflow:hidden}
+.pz::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--pg)}
+.pz .rank{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.pz .trophy{font-size:34px;line-height:1;margin:14px 0 10px}
+.pz h3{font-size:21px;margin-bottom:6px}
+.pz .amt{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:-.01em;margin:12px 0 0;
+  padding:10px;border-radius:10px;background:rgba(var(--tint),.05);border:1px dashed var(--line-2);color:var(--ink-2)}
+.pz1{--pg:linear-gradient(90deg,var(--c1),var(--c2))}
+.pz2{--pg:linear-gradient(90deg,var(--c3),var(--amber))}
+.pz3{--pg:linear-gradient(90deg,#ffd24a,var(--c3) 50%,var(--c2))}
+.pz3{background:linear-gradient(180deg,color-mix(in srgb, var(--c2) 9%, transparent),rgba(var(--tint),.015))}
+@media(max-width:860px){.podium{grid-template-columns:1fr}}
+.tbd{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--amber);background:color-mix(in srgb, var(--amber) 11%, transparent);border:1px solid color-mix(in srgb, var(--amber) 34%, transparent);
+  padding:5px 11px;border-radius:100px}
+
+/* misc */
+.callout{border-radius:14px;padding:20px 22px;background:color-mix(in srgb, var(--c1) 7%, transparent);border:1px solid color-mix(in srgb, var(--c1) 24%, transparent);margin-top:26px}
+.callout.warn{background:color-mix(in srgb, var(--c3) 8%, transparent);border-color:color-mix(in srgb, var(--c3) 27%, transparent)}
+.callout.warn>b:first-child{color:var(--c3s)}
+.callout>b:first-child{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c1);margin-bottom:7px}
+.callout p b{color:var(--ink);font-weight:700}
+.callout p:last-child{margin-bottom:0}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:10px 20px;margin-top:20px;font-size:14.5px}
+.kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.kv dd{margin:0;color:var(--ink-2)}
+@media(max-width:640px){.kv{grid-template-columns:1fr;gap:2px 0}.kv dd{margin-bottom:12px}}
+hr.rule{border:none;border-top:1px solid var(--line);margin:52px 0}
+.checklist{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+.checklist li{position:relative;padding-left:33px;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+.checklist li b{color:var(--ink)}
+.checklist li::before{content:"✓";position:absolute;left:0;top:2px;color:var(--c4);font-weight:800;font-size:12px;
+  background:color-mix(in srgb, var(--c4) 13%, transparent);border:1px solid color-mix(in srgb, var(--c4) 32%, transparent);width:21px;height:21px;
+  border-radius:6px;display:grid;place-items:center}
+
+/* schedule sub-checkpoints & gap */
+.sub{list-style:none;padding:0 0 0 18px;margin:16px 0 0;display:grid;gap:9px;border-left:1px dashed var(--line-2)}
+.sub li{font-size:13.7px;color:var(--ink-2);display:grid;grid-template-columns:74px 1fr;gap:14px;line-height:1.5}
+.sub li>b{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+.sub li strong{color:var(--ink);font-weight:700}
+.sub-h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:18px}
+.slot.gap .body{border-left-style:dashed}
+.slot.gap .body::before{background:var(--bg);border-color:var(--line-2);box-shadow:none}
+.tag.party{background:color-mix(in srgb, var(--amber) 13%, transparent);color:var(--amber);
+  border:1px solid color-mix(in srgb, var(--amber) 32%, transparent)}
+.tag.key{background:color-mix(in srgb, var(--c2) 16%, transparent);color:var(--c2);
+  border:1px solid color-mix(in srgb, var(--c2) 34%, transparent)}
+/* video shot-list */
+.shots{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
+.shot{background:var(--solid);padding:16px 20px;display:grid;grid-template-columns:116px 1fr;gap:20px;align-items:start}
+.shot .t{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--c1);letter-spacing:-.02em;padding-top:1px}
+.shot h4{margin:0 0 3px;font-size:15px}
+.shot p{margin:0;font-size:13.8px}
+@media(max-width:640px){.shot{grid-template-columns:1fr;gap:4px}.sub li{grid-template-columns:1fr;gap:0}}
+/* tool cards */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.tool{border:1px solid var(--line);border-radius:13px;padding:18px 20px;background:var(--panel)}
+.tool h4{margin:0 0 5px;font-size:15.5px}
+.tool h4 a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-2)}
+.tool h4 a:hover{color:var(--c1);border-color:var(--c1)}
+.tool p{margin:0;font-size:13.8px}
+@media(max-width:640px){.tools{grid-template-columns:1fr}}
+
+/* ============ FAQ ============ */
+.faq-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.faq-nav a{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-2);border:1px solid var(--line);background:var(--panel);
+  padding:8px 14px;border-radius:100px;transition:.16s}
+.faq-nav a:hover{color:var(--c1);border-color:color-mix(in srgb, var(--c1) 40%, transparent);background:color-mix(in srgb, var(--c1) 9%, transparent)}
+.faq-h{display:flex;align-items:center;gap:14px;margin:52px 0 18px;scroll-margin-top:90px}
+.faq-h h2{margin:0;font-size:22px}
+.faq-h .ln{flex:1;height:1px;background:var(--line)}
+.faq-h .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-3)}
+details.q{border:1px solid var(--line);border-radius:13px;background:var(--panel);margin-bottom:10px;
+  overflow:hidden;transition:.18s}
+details.q:hover{border-color:var(--line-2)}
+details.q[open]{background:var(--panel-2);border-color:color-mix(in srgb, var(--c1) 28%, transparent)}
+details.q summary{cursor:pointer;list-style:none;padding:17px 52px 17px 20px;font-size:15.5px;font-weight:650;
+  color:var(--ink);position:relative;line-height:1.45;letter-spacing:-.01em}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:19px;font-weight:400;color:var(--ink-3);transition:.2s;line-height:1}
+details.q[open] summary::after{content:"−";color:var(--c1);transform:translateY(-50%) rotate(180deg)}
+details.q .a{padding:0 22px 20px;font-size:14.6px;color:var(--ink-2);line-height:1.65}
+details.q .a p{margin:0 0 11px;font-size:14.6px}
+details.q .a p:last-child{margin-bottom:0}
+details.q .a ul{margin:0 0 11px;padding-left:19px}
+details.q .a li{margin-bottom:6px}
+details.q .a b{color:var(--ink)}
+details.q .a a{color:var(--c1)}
+
+/* footer */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;position:relative;z-index:1}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--ink-3)}
+.foot a{color:var(--ink-2);text-decoration:none}
+.foot a:hover{color:var(--c1)}
+.foot nav{display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#home">
+      <div class="mark">FMX</div>
+      <div><b>FMX AI Hackathon</b><span>Oct 20 · 8AM–12PM</span></div>
+    </a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <nav class="links" id="links">
+      <a href="#home">Home</a>
+      <a href="#tracks">Tracks</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#submission">Submission</a>
+      <a href="#rubric">Rubric</a>
+      <a href="#mentors">Mentors</a>
+      <a href="#prizes">Prizes</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="tt" id="tt" aria-label="Switch colour theme" title="Switch colour theme">
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HOME ================= -->
+<section class="page" id="p-home">
+  <div class="wrap hero">
+    <h1>Showcase <span class="grad">what's possible</span> in primary care.</h1>
+    <div class="cta-row">
+      <a class="btn btn-p" href="#tracks">Explore the tracks →</a>
+      <a class="btn btn-s" href="#submission">How to submit</a>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><div class="k">Date</div><div class="v">Oct 20</div></div>
+      <div class="fact"><div class="k">Time</div><div class="v">8AM–12PM</div></div>
+      <div class="fact"><div class="k">Participants</div><div class="v">100</div></div>
+    </div>
+  </div>
+
+  <div class="wrap sec">
+    <div class="eyebrow">The premise</div>
+    <h2>You already know what's broken. Share with everyone how you'd fix it.</h2>
+    <p class="lead">This is a learning morning. You'll spend it building with AI tools — some of you for the first time — alongside colleagues who have already done it and can show you how. The prizes are real, but the point is to stretch: take a problem you've quietly wished someone would fix, and find out how far you can get with it before lunch.</p>
+
+    <div class="grid-3" style="margin-top:34px">
+      <div class="card">
+        <h3>Bring a problem you actually care about</h3>
+        <p style="margin:0;font-size:14.5px">Not the easiest one to solve — the one that's been bothering you for years. Think harder about why it's still broken than about what to build, and the building gets easier.</p>
+      </div>
+      <div class="card">
+        <h3>Learn the tools by using them</h3>
+        <p style="margin:0;font-size:14.5px">You don't need to write code. AI build tools have collapsed the distance between describing an idea and having a working version of it, and this is a supervised first run at that.</p>
+      </div>
+      <div class="card">
+        <h3>Colleagues who've already done it</h3>
+        <p style="margin:0;font-size:14.5px">Physician mentors on the floor all morning. They've built things, hit the walls you're about to hit, and can get you unstuck in two minutes rather than twenty.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="eyebrow">Two tracks</div>
+    <h2>Choose your side of the exam room.</h2>
+    <div class="grid-2" style="margin-top:28px">
+      <div class="track t1">
+        <div class="no">Track 01</div>
+        <h3>Patient Empowerment</h3>
+        <p style="font-size:15px;margin:0">Help your patients take a more active, informed, and confident role in their own care.</p>
+        <a class="btn btn-s" href="#tracks" style="margin-top:20px;padding:10px 16px;font-size:13.5px">Read the brief →</a>
+      </div>
+      <div class="track t2">
+        <div class="no">Track 02</div>
+        <h3>Clinical Team Empowerment</h3>
+        <p style="font-size:15px;margin:0">Get your own day back — less time fighting the system, more time practicing medicine.</p>
+        <a class="btn btn-s" href="#tracks" style="margin-top:20px;padding:10px 16px;font-size:13.5px">Read the brief →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="eyebrow">The day</div>
+    <h2>How it runs.</h2>
+    <div class="shots" style="margin-top:28px">
+      <div class="shot">
+        <div class="t">8:00 – 8:25</div>
+        <div><h4>Welcome &amp; Keynote with Dr. Mui</h4><p>Doors, coffee, and the opening keynote — why this morning exists and what the two tracks are asking of you.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">8:30 – 9:00</div>
+        <div><h4>Team Formation &amp; Problem Selection</h4><p>Find your team and choose the problem you're solving.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">9:00 – 11:30</div>
+        <div><h4>Hackathon Work Session &amp; Design Iteration</h4><p>Two and a half hours of building, with mentors circulating the whole time.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">11:30 – 12:00</div>
+        <div><h4>Presentation Submission</h4><p>Record and submit your three-minute video.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t" style="color:var(--amber)">4:30 – 5:00</div>
+        <div><h4>Awards &amp; Closing Remarks</h4><p>Winners announced at the Innovation Block Party.</p></div>
+      </div>
+    </div>
+    <div class="cta-row"><a class="btn btn-p" href="#schedule">Full schedule →</a></div>
+  </div>
+</section>
+
+<!-- ================= TRACKS ================= -->
+<section class="page" id="p-tracks">
+  <div class="wrap phead">
+    <div class="eyebrow">Challenge briefs</div>
+    <h1>Two tracks.</h1>
+    <p class="lead">Pick one track during problem selection and stay in it — scoring happens within tracks, and there's a winner in each. Both briefs are deliberately wide. Your job between 8:30 and 9:00 is to make one of them narrow enough to build.</p>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="track t1" style="margin-bottom:24px">
+      <div class="no">Track 01</div>
+      <h3>Patient Empowerment</h3>
+      <div class="hmw">How might we help patients take a more active, informed, and confident role in their healthcare?</div>
+      <p>Patients are often expected to navigate complex medical information, fragmented systems, difficult decisions, and unclear next steps with limited support. This track challenges teams to design solutions that give patients greater knowledge, agency, access, and control throughout their healthcare journey.</p>
+      <h4 style="margin-top:24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c1)">Teams may address challenges such as</h4>
+      <ul class="chal">
+        <li>Understanding diagnoses, test results, medications, or treatment options</li>
+        <li>Preparing for appointments and asking better questions</li>
+        <li>Navigating referrals, insurance, costs, and follow-up care</li>
+        <li>Managing chronic conditions between visits</li>
+        <li>Accessing trustworthy and understandable health information</li>
+        <li>Communicating needs, goals, preferences, and symptoms</li>
+        <li>Reducing barriers related to language, health literacy, disability, or technology</li>
+        <li>Helping caregivers and families participate appropriately in care</li>
+      </ul>
+      <div class="strong-note"><b>What wins this track</b>The strongest solutions will address a specific patient problem, fit naturally into patients' lives, and make healthcare easier to understand or navigate without creating additional burden.</div>
+    </div>
+
+    <div class="track t2">
+      <div class="no">Track 02</div>
+      <h3>Clinical Team Empowerment</h3>
+      <div class="hmw">How might we help clinicians and care teams spend more time delivering excellent care and less time fighting the healthcare system?</div>
+      <p>Physicians and clinical teams regularly encounter administrative burden, fragmented information, inefficient workflows, communication failures, and repetitive manual work. This track challenges teams to create solutions that help healthcare professionals work more effectively, collaborate more easily, and focus their attention on the work that matters most.</p>
+      <h4 style="margin-top:24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c3)">Teams may address challenges such as</h4>
+      <ul class="chal">
+        <li>Reducing documentation and administrative work</li>
+        <li>Improving clinical decision support without creating alert fatigue</li>
+        <li>Making relevant patient information easier to find and act upon</li>
+        <li>Improving communication between clinicians, staff, patients, and outside organizations</li>
+        <li>Simplifying referrals, prior authorizations, results management, or care coordination</li>
+        <li>Supporting quality improvement, peer learning, or clinical feedback</li>
+        <li>Reducing cognitive overload, burnout, and unnecessary interruptions</li>
+        <li>Improving team-based care and ensuring work reaches the right person</li>
+        <li>Helping clinicians identify and address gaps in care</li>
+      </ul>
+      <div class="strong-note"><b>What wins this track</b>The strongest solutions will solve a clearly defined problem experienced by real clinical teams, integrate realistically into healthcare workflows, and improve care without simply adding another task, alert, or dashboard.</div>
+    </div>
+
+    <div class="callout" style="margin-top:30px">
+      <b>Cross-track note</b>
+      <p>Plenty of good ideas serve both your patients and your team. Declare the track whose <em>primary</em> user you're designing for — the one whose day gets measurably better — and weigh your tradeoffs from there. If you're genuinely torn, pick the one where you can point to a specific person you know.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCHEDULE ================= -->
+<section class="page" id="p-schedule">
+  <div class="wrap phead">
+    <div class="eyebrow">Schedule · Tuesday, October 20</div>
+    <h1>Four hours, <span class="grad">paced</span>.</h1>
+    <p class="lead">The five blocks below are the official run of the hackathon. Inside the long work session we've suggested a rhythm — those checkpoints are guidance you can bend to your project.</p>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="timeline">
+
+      <div class="slot key">
+        <div class="time">8:00 – 8:25<small>25 min</small></div>
+        <div class="body">
+          <h4>Welcome &amp; Keynote with Dr. Mui <span class="tag key">Keynote</span></h4>
+          <p>Doors, coffee, and the opening keynote. Why this morning exists, what the two tracks are asking of you, and how the judging works. Arrive on time — the framing here is what separates teams that pick a good problem from teams that spend an hour choosing.</p>
+        </div>
+      </div>
+
+      <div class="slot key">
+        <div class="time">8:30 – 9:00<small>30 min</small></div>
+        <div class="body">
+          <h4>Team Formation &amp; Problem Selection</h4>
+          <p>Find your team and choose the problem you're solving. With 100 participants in the room this is the highest-leverage half hour of the day, so use all of it.</p>
+          <div class="sub-h">Suggested rhythm</div>
+          <ul class="sub">
+            <li><b>8:30</b><span>Post your problem on the idea wall in one sentence, or go read what's already up there.</span></li>
+            <li><b>8:40</b><span>Teams of five form around problems.</span></li>
+            <li><b>8:50</b><span>Write down your problem and get ready to build a solution proposal.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slot">
+        <div class="time">9:00 – 11:30<small>2 hr 30 min</small></div>
+        <div class="body">
+          <h4>Hackathon Work Session &amp; Design Iteration <span class="tag build">Build</span></h4>
+          <p>The main event. Mentors circulate the entire block — flag one down the moment you're stuck rather than burning twenty minutes on it. There are no scheduled interruptions, so pace yourselves against the checkpoints below.</p>
+          <div class="sub-h">Suggested checkpoints</div>
+          <ul class="sub">
+            <li><b>9:30</b><span><strong>First mentor check.</strong> Pitch your <em>problem</em>, not your solution, and let a mentor stress-test whether it's narrow enough.</span></li>
+            <li><b>10:00</b><span>Ugly version of your core interaction working end to end. If it isn't, cut scope now rather than at 11:00.</span></li>
+            <li><b>10:30</b><span><strong>Second mentor check.</strong> Show what you have, however rough. Last good moment to change direction.</span></li>
+            <li><b>11:00</b><span><strong>Feature freeze.</strong> Stop building. Decide exactly what the video will show and in what order.</span></li>
+            <li><b>11:15</b><span>Rehearse your three minutes out loud once. Almost nobody does this and it is the single cheapest way to score better.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slot key">
+        <div class="time">11:30 – 12:00<small>30 min</small></div>
+        <div class="body">
+          <h4>Presentation Submission <span class="tag hard">Closes 12:00</span></h4>
+          <p>Record your three-minute video and submit it with any supplemental files. Half an hour is enough for two or three takes if you've already decided what you're showing — and not nearly enough if you haven't.</p>
+          <p style="margin-top:10px">Check your sharing settings before you submit. A link that won't open can't be reviewed. See the <a href="#submission" style="color:var(--c1)">submission instructions</a> for the full checklist.</p>
+        </div>
+      </div>
+
+      <div class="slot gap">
+        <div class="time">12:00 – 4:30<small>Break</small></div>
+        <div class="body">
+          <h4>Judging</h4>
+          <p>Enjoy the conference while your submissions are being evaluated.</p>
+        </div>
+      </div>
+
+      <div class="slot key">
+        <div class="time">4:30 – 5:00<small>30 min</small></div>
+        <div class="body">
+          <h4>Awards &amp; Closing Remarks <span class="tag party">Block Party</span></h4>
+          <p>Winners announced at the <b>Innovation Block Party</b> — both track prizes plus the "OMG This Is So Cool" Award.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUBMISSION ================= -->
+<section class="page" id="p-submission">
+  <div class="wrap phead">
+    <div class="eyebrow">Submission instructions</div>
+    <h1>Submit a <span class="grad">three-minute video</span>.</h1>
+    <p class="lead">Every team submits one recorded video overview of what they built, with a shareable link, plus any supplemental files. The submission window is <b style="color:var(--ink)">11:30 – 12:00</b>.</p>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="eyebrow">Recording</div>
+    <h2>Use a free screen-recording tool.</h2>
+    <p>Both of these are free, run in the browser, need no editing skills, and give you a shareable link the moment you stop recording. If you already have a tool you like, use that instead — we only care that the link opens.</p>
+
+    <div class="tools">
+      <div class="tool">
+        <h4><a href="https://www.loom.com/" target="_blank" rel="noopener">Loom →</a></h4>
+        <p>Records your screen and your face at once. Generous free tier, instant link, and viewers don't need an account. The safe default if you've never done this.</p>
+      </div>
+      <div class="tool">
+        <h4><a href="https://www.tella.com/" target="_blank" rel="noopener">Tella →</a></h4>
+        <p>Slightly more polished output — clean backgrounds, easy trimming, and you can re-record a single section without starting over. Worth it if you want to take a second take.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <b>Best approach</b>
+      <p>Narrate over whatever you built while you click through it, or narrate over a short slide deck — both work, and neither is penalised. Scoring is about how clearly the concept lands, not how finished it looks. Just make sure there's something on screen rather than only a talking head.</p>
+    </div>
+
+    <hr class="rule">
+
+    <div class="eyebrow">Structure</div>
+    <h2>What to cover in three minutes.</h2>
+    <p>Not a rule, but it helps guide you to include the essential information in the right sequence.</p>
+
+    <div class="shots">
+      <div class="shot">
+        <div class="t">0:00 – 0:30</div>
+        <div><h4>The problem</h4><p>One specific clinical moment that goes badly today. Name the patient or the clinician. If a colleague wouldn't nod within fifteen seconds, it's too abstract.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">0:30 – 2:00</div>
+        <div><h4>The concept</h4><p>The bulk of your time. Walk through what you built — prototype, mockup, or slides — and narrate how it would work. Show the one core interaction rather than touring every screen.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">2:00 – 2:30</div>
+        <div><h4>Adoption</h4><p>Who it's for, who would champion it inside a practice, and how it realistically gets picked up — including who would pay for it and out of which budget.</p></div>
+      </div>
+      <div class="shot">
+        <div class="t">2:30 – 3:00</div>
+        <div><h4>Barriers and what's next</h4><p>What would stop this from being adopted if it existed. Say plainly which parts are illustrative. Then one sentence on what you'd do next.</p></div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="eyebrow">Required</div>
+    <h2>What the form asks for.</h2>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h4>Team &amp; track</h4>
+          <p style="margin:0;font-size:14.5px">Team name, every member's name and specialty, and your chosen track. List everyone — prizes follow this list.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Video link</h4>
+          <p style="margin:0;font-size:14.5px">A shareable Loom, Tella, or equivalent URL. Three minutes maximum.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Problem statement — 50 words max</h4>
+          <p style="margin:0;font-size:14.5px">One paragraph naming the specific user and the specific moment that goes wrong today. This is read first, before your video plays.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Supplemental files — optional</h4>
+          <p style="margin:0;font-size:14.5px">Anything that helps convey what you built:</p>
+          <ul>
+            <li>A live link to the prototype, or a repository</li>
+            <li>Your slide deck</li>
+            <li>Screenshots, workflow diagrams, or design files</li>
+            <li>Notes from anyone you tested it on during the morning</li>
+          </ul>
+          <p style="margin:10px 0 0;font-size:14.5px">Supplemental files are reviewed but never a substitute for the video.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Share your tech stack</h4>
+          <p style="margin:0;font-size:14.5px">List the models, tools, and templates you used.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <b>Check your link before you submit</b>
+      <p>The single most common way to lose a morning's work: a video set to "only people in my organization." Open your own link in a private browsing window first. If it asks you to sign in, your video can't be reviewed.</p>
+    </div>
+
+      </div>
+</section>
+
+<!-- ================= RUBRIC ================= -->
+<section class="page" id="p-rubric">
+  <div class="wrap phead">
+    <div class="eyebrow">Judging</div>
+    <h1>Scoring rubric.</h1>
+    <p class="lead">Five criteria, 20 points each, 100 total.</p>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="callout">
+      <b>Judged on the concept, not the polish</b>
+      <p>You have two and a half hours. Nobody expects a finished product, and scoring is not about how sophisticated the build is. What matters is whether the <b>concept comes across clearly</b> — what the problem is, who it's for, and whether you've thought about what it would take for it to exist. A rough prototype with a sharp, well-reasoned idea beats a slick one you can't explain.</p>
+    </div>
+
+    <h2 style="margin-top:52px">The five criteria</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Criterion</th><th>Points</th><th>What earns points</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crit">Clinical problem insight<small>Would a colleague recognize this problem in the first fifteen seconds?</small></td>
+            <td class="pts">20</td>
+            <td>A specific patient or a specific clinician in a specific moment — not a category like "care coordination." Evidence the team understands why the problem has survived this long and why the current workaround fails. This is the criterion you are uniquely positioned to win, and the one most teams underinvest in.</td>
+          </tr>
+          <tr>
+            <td class="crit">Solution quality &amp; creativity<small>Is this a good answer to the problem you just named — and is it clear who it's for?</small></td>
+            <td class="pts">20</td>
+            <td>The idea follows directly from the problem rather than arriving from somewhere else, and the team is specific about who would actually use it. Thoughtful design decisions and an approach that goes beyond wrapping a chatbot around an existing task. Novelty counts only in service of the problem.</td>
+          </tr>
+          <tr>
+            <td class="crit">Workflow &amp; real-world fit<small>Has the team thought about what it would take for this to actually exist?</small></td>
+            <td class="pts">20</td>
+            <td>Where it lives in the day, who operates it, and what it costs in attention. How it might get paid for, and whether it attaches to a budget someone already has. An honest account of the barriers to adoption — IT, trust, training, regulation, inertia. Naming a hard barrier scores better than not mentioning it.</td>
+          </tr>
+          <tr>
+            <td class="crit">Prototype &amp; video execution<small>Could someone explain your idea back to you after watching once?</small></td>
+            <td class="pts">20</td>
+            <td><b>Clarity, not sophistication.</b> Something visual on screen that makes the concept concrete — a working prototype, a clickable mockup, or well-built slides all count equally here. Clear narration, sensible pacing, finishes inside three minutes. Explicit about which parts are real and which are illustrative; candor scores, overclaiming does not. What two and a half hours buys is well understood.</td>
+          </tr>
+          <tr>
+            <td class="crit">Impact potential<small>If this existed, who is meaningfully better off?</small></td>
+            <td class="pts">20</td>
+            <td>A clear answer to who benefits most, and why them rather than someone else. Plausible sense of how far it could reach beyond one practice, and a credible next step past the hackathon. Extra weight when the team pressure-tested the idea with a mentor or a colleague during the morning and changed something as a result.</td>
+          </tr>
+          <tr class="total-row">
+            <td class="crit">Total</td><td class="pts">100</td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENTORS ================= -->
+<section class="page" id="p-mentors">
+  <div class="wrap phead">
+    <div class="eyebrow">Mentors</div>
+    <h1>Physicians who <span class="grad">build things</span>.</h1>
+    <p class="lead">Every mentor is a physician with experience in health technology. They understand how healthcare works, which means you can skip the background and get straight to the part you're stuck on.</p>
+    <p class="lead" style="margin-top:14px">They circulate the room for the whole 9:00–11:30 work session. Two checkpoints are suggested on the schedule, but flag anyone down at any time — that is the entire reason they're here.</p>
+  </div>
+  <div class="wrap sec-sm">
+    <div class="mentors" id="mentor-grid"></div>
+    <div class="callout" style="margin-top:34px">
+      <b>How to use a mentor well</b>
+      <p>Open with your problem statement and one specific question. "Would you use this?" gets you a collegial yes. "What would make you close this and go back to what you were doing?" gets you something you can act on before 11:00.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRIZES ================= -->
+<section class="page" id="p-prizes">
+  <div class="wrap phead">
+    <div class="eyebrow">Prizes</div>
+    <h1>Three awards.</h1>
+    <p class="lead">One winner in each track, scored only against the other teams in that track — plus one award that ignores tracks entirely and goes to whatever made us sit up. Announced <b style="color:var(--ink)">4:30 – 5:00 PM at the Innovation Block Party</b>.</p>
+    <div style="margin-top:18px"><span class="tbd">◆ Prize values TBD</span></div>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="podium">
+      <div class="pz pz1">
+        <div class="rank">Track 01</div>
+        <div class="trophy">🩺</div>
+        <h3>Patient Empowerment Winner</h3>
+        <p style="font-size:14px;margin:0">Highest total rubric score among Track 1 teams. The build that most convincingly gives a patient more knowledge, agency, or control.</p>
+        <div class="amt">Prize — TBD</div>
+      </div>
+      <div class="pz pz2">
+        <div class="rank">Track 02</div>
+        <div class="trophy">⚕️</div>
+        <h3>Clinical Team Empowerment Winner</h3>
+        <p style="font-size:14px;margin:0">Highest total rubric score among Track 2 teams. The build that most convincingly gives a physician or care team their day back.</p>
+        <div class="amt">Prize — TBD</div>
+      </div>
+      <div class="pz pz3">
+        <div class="rank">Both tracks</div>
+        <div class="trophy">🤯</div>
+        <h3>The "OMG This Is So Cool" Award</h3>
+        <p style="font-size:14px;margin:0">For the build that made the room stop scrolling. Not necessarily the most rigorous or the most deployable — the one that made us stop and ask "wait, how?"</p>
+        <div class="amt">Prize — TBD</div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>How the track winners are picked</h3>
+        <p style="font-size:14.5px;margin:0">Straight from the rubric. Every submission is scored across the five criteria, and the highest total in each track wins. There's no finalist round — every team is assessed the same way, from the same three minutes.</p>
+        <a class="btn btn-s" href="#rubric" style="margin-top:18px;padding:10px 16px;font-size:13.5px">See the rubric →</a>
+      </div>
+      <div class="card">
+        <h3>How the "OMG" award is picked</h3>
+        <p style="font-size:14.5px;margin:0">Deliberately not from the rubric. Once scoring is done, the organizers watch back the submissions and pick the one that genuinely surprised them. Ambition, audacity, and technical nerve all count.</p>
+        <div style="margin-top:18px"><span class="tbd">Values announced at the block party</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="page" id="p-faq">
+  <div class="wrap phead">
+    <div class="eyebrow">Frequently asked</div>
+    <h1>Questions, <span class="grad">answered</span>.</h1>
+    <p class="lead">Everything we get asked before the doors open — most of it from participants who have never built anything before. If your question isn't here, ask an organizer at check-in or flag down a mentor.</p>
+    <div class="faq-nav">
+      <a href="#faq-building">Building without a tech background</a>
+      <a href="#faq-teams">Teams</a>
+      <a href="#faq-projects">Projects &amp; eligibility</a>
+      <a href="#faq-submitting">Submitting your video</a>
+      <a href="#faq-logistics">Logistics</a>
+      <a href="#faq-judging">Judging</a>
+    </div>
+  </div>
+
+  <div class="wrap sec-sm">
+
+    <!-- BUILDING -->
+    <div class="faq-h" id="faq-building"><h2>Building without a tech background</h2><div class="ln"></div><span class="ct">5</span></div>
+
+    <details class="q" open>
+      <summary>I'm not an engineer. Can I actually build something in one morning?</summary>
+      <div class="a">
+        <p>Yes — and this event is designed on that assumption. Nobody in the room is a professional software developer, so nobody is starting at a disadvantage.</p>
+        <p>What makes this possible now is that AI build tools have collapsed the distance between describing a thing and having a working version of it. People who have never written a line of code routinely produce a functioning prototype in an afternoon. Two and a half hours is tight but real.</p>
+        <p>And the thing you bring that can't be taught in a morning — knowing which problem is actually worth solving — is worth <b>40 of the 100 rubric points</b>.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Do I need to know how to code?</summary>
+      <div class="a">
+        <p>No. Teams win on the clarity of the problem and the sense of the solution, not on implementation. Perfectly valid ways to build:</p>
+        <ul>
+          <li><b>AI build tools</b> that generate a working app from a description</li>
+          <li><b>No-code and low-code builders</b> for forms, workflows, and simple apps</li>
+          <li><b>Clickable design prototypes</b> — Figma or similar, where nothing is real but every click works</li>
+          <li><b>A narrated slide walkthrough</b> of the interaction, if that's genuinely the best way to show it</li>
+        </ul>
+        <p>The last one scores lowest on Prototype &amp; video execution, so use it as a fallback rather than a plan. Mentors are here specifically to get you past whichever part you haven't done before.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What should I set up before October 20?</summary>
+      <div class="a">
+        <p>Half an hour the night before is worth an hour on the day:</p>
+        <ul>
+          <li>Create a free <a href="https://www.loom.com/" target="_blank" rel="noopener">Loom</a> or <a href="https://www.tella.com/" target="_blank" rel="noopener">Tella</a> account and record a ten-second test video. Confirm you can open the link in a private browsing window.</li>
+          <li>Make sure your laptop can screen-share and that your microphone works.</li>
+          <li>If you already use an AI build tool, log in and confirm you have credits.</li>
+          <li>Think about one problem. Not a solution — a problem.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Does it have to be software?</summary>
+      <div class="a">
+        <p>No. A workflow redesign, a communication protocol, a new form, a service change — all valid, as long as your video shows it working in some form. A role-played patient conversation or an annotated workflow with a live walkthrough can clear the bar. What doesn't clear it is describing what you would have built.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What if we don't finish?</summary>
+      <div class="a">
+        <p>Submit anyway. A sharply framed problem with a half-working prototype and an honest account of what broke beats several polished entries that never named a real patient. Nearly every team feels unfinished at 11:30 — that's the format, not a failure.</p>
+      </div>
+    </details>
+
+    <!-- TEAMS -->
+    <div class="faq-h" id="faq-teams"><h2>Teams</h2><div class="ln"></div><span class="ct">4</span></div>
+
+    <details class="q" open>
+      <summary>How do we form teams?</summary>
+      <div class="a">
+        <p>Team formation runs <b>8:30 – 9:00</b>, immediately after the keynote.</p>
+        <p>Write your problem on a card in one sentence and post it on the idea wall, or read what's already up there and go stand next to the one you'd want to fix. With 100 participants in the room, someone else has your problem.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>How big can a team be?</summary>
+      <div class="a">
+        <p><b>Five participants per team.</b> Big enough to split the work across a two-and-a-half-hour build, small enough that nobody spends the morning waiting on a decision.</p>
+        <p>With 100 participants, that makes 20 teams.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Do I need to know which track I'm in before I arrive?</summary>
+      <div class="a">
+        <p>No. Choose during problem selection and declare it on the submission form. If your idea spans both, pick the track whose <b>primary</b> user your solution serves. You can switch until you submit, but do it early — there's a winner in each track, and switching at 11:45 means you framed for the wrong audience all morning.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Can one team submit to both tracks?</summary>
+      <div class="a">
+        <p>No — one submission, one track, per team. Splitting your attention across two briefs in two and a half hours is the fastest way to place in neither.</p>
+      </div>
+    </details>
+
+    <!-- PROJECTS -->
+    <div class="faq-h" id="faq-projects"><h2>Projects &amp; eligibility</h2><div class="ln"></div><span class="ct">4</span></div>
+
+    <details class="q" open>
+      <summary>Do solutions have to be built during the hackathon, or can I showcase an existing project?</summary>
+      <div class="a">
+        <p><b>They have to be built during the hackathon.</b> Existing projects are not eligible for judging — this is a build event, not a demo day, and showcasing prior work isn't fair to teams starting from nothing at 9:00.</p>
+        <p>What you <em>can</em> bring:</p>
+        <ul>
+          <li><b>Generic scaffolding</b> — starter templates, design systems, an AI tool you already pay for.</li>
+          <li><b>Ideas and research.</b> Thinking hard about a problem in advance is encouraged. Show up with a strong problem statement.</li>
+        </ul>
+        <p>What you can't bring: a working prototype of your solution, problem-specific work done before the event, or a product you're already using in practice. <b>The idea and everything that demonstrates it must be built between 8:00 and 12:00 on October 20.</b></p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Can I keep working on something I started at a previous event?</summary>
+      <div class="a">
+        <p>Not as a competing entry. You're welcome to attend and keep building, and mentors will happily give you feedback — but a continuation of prior work can't be scored against teams that started this morning. The better move is to take what you learned and attack a different slice of the same problem from scratch.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What if my idea is something a vendor already sells?</summary>
+      <div class="a">
+        <p>Then you've found a real problem, which is most of the battle. Say so in your video and explain why the existing product doesn't work in your setting — too expensive, wrong workflow, not available on your EHR, ignored by your team. "The thing exists but nobody can actually use it" is a legitimate and often excellent problem statement.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>How finished does it need to be?</summary>
+      <div class="a">
+        <p>Much less finished than you think, and much more <em>working</em> than you think. One narrow interaction running end to end beats five features that are all 60% done.</p>
+        <p>Mocking parts is completely acceptable — hardcoded data, a fake API response, a human behind the curtain. Just say which parts are real in your video. That candour is rewarded; overclaiming is not.</p>
+      </div>
+    </details>
+
+    <!-- SUBMITTING -->
+    <div class="faq-h" id="faq-submitting"><h2>Submitting your video</h2><div class="ln"></div><span class="ct">6</span></div>
+
+    <details class="q" open>
+      <summary>Are there live demos?</summary>
+      <div class="a">
+        <p>No. Every team submits a recorded three-minute video between 11:30 and 12:00.</p>
+        <p>Submissions are reviewed after the morning ends. Winners are announced <b>4:30 – 5:00 PM at the Innovation Block Party</b>.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What should the video actually look like?</summary>
+      <div class="a">
+        <p>Narrate over your prototype while you click through it, or narrate over a short slide deck. Screen recording with your voice on top — that's it. No editing, no music, no title cards.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What if we run over three minutes?</summary>
+      <div class="a">
+        <p>We may not count any content beyond three minutes as part of the evaluation, so lead with what matters most.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Do we all have to be on camera?</summary>
+      <div class="a">
+        <p>Not required — but please do. Part of what makes these videos worth watching is seeing the people behind the ideas, and both Loom and Tella put your face in a small corner bubble while your screen fills the rest, so it costs you nothing.</p>
+        <p>It doesn't affect your score either way. One narrator is usually cleaner than four, so if the whole team wants to appear, a quick round of introductions at the start works nicely.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Do I have to use Loom or Tella?</summary>
+      <div class="a">
+        <p>No — any tool that produces a shareable link works. We recommend those two because they're free, browser-based, and generate a link the moment you stop recording. Whatever you use, the requirement is the same: <b>the link must open without signing in.</b></p>
+        <p>Test it in a private browsing window before you submit. A link that asks for a login scores zero.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What counts as a supplemental file?</summary>
+      <div class="a">
+        <p>Anything that helps convey what you built: a live link to the prototype, a repository, your slide deck, screenshots, workflow diagrams, or notes from someone you tested it on. All optional.</p>
+        <p>Supplemental files are reviewed but never a substitute for the video. Assume the three minutes are all that gets watched.</p>
+      </div>
+    </details>
+
+    <!-- LOGISTICS -->
+    <div class="faq-h" id="faq-logistics"><h2>Logistics</h2><div class="ln"></div><span class="ct">4</span></div>
+
+    <details class="q">
+      <summary>What should I bring?</summary>
+      <div class="a">
+        <ul>
+          <li>A laptop and charger — you can't build or record on a phone</li>
+          <li>Headphones with a microphone, which make your video noticeably clearer in a room of 100 people</li>
+          <li>Any AI tool accounts you'll want, set up the night before</li>
+          <li>One problem you actually care about</li>
+        </ul>
+        <p>Breakfast, coffee, wifi, power, and snacks are provided.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>What if I arrive late?</summary>
+      <div class="a">
+        <p>Come anyway. But the 8:00 keynote and the 8:30 team formation block are where teams and problems get set, so arriving after 9:00 makes it hard to join a team and very hard to submit competitively.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Can I attend remotely?</summary>
+      <div class="a">
+        <p>This is an in-person event. The mentor access and the hallway conversations are most of the value, and a four-hour format doesn't leave room for hybrid coordination. Plan to be in the room from 8:00 to 12:00.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Do I have to come back for the block party?</summary>
+      <div class="a">
+        <p>Winning doesn't depend on attending. But awards and closing remarks run <b>4:30 – 5:00 PM</b>, the winning videos get shown, and it's where the conversations about actually building these things happen. Come back.</p>
+      </div>
+    </details>
+
+    <!-- JUDGING -->
+    <div class="faq-h" id="faq-judging"><h2>Judging</h2><div class="ln"></div><span class="ct">3</span></div>
+
+    <details class="q" open>
+      <summary>How are submissions scored?</summary>
+      <div class="a">
+        <p>Every submission is scored by <b>AI, with human oversight</b>. Your submission is evaluated against the <a href="#rubric">five rubric criteria</a> — 20 points each, 100 total. The organizers then review the results before anything is announced.</p>
+        <p>It felt like the honest choice for an AI hackathon: we're asking you to build with these tools all morning, so we use them too.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Does a person look at our submission at all?</summary>
+      <div class="a">
+        <p>Yes. The organizers review the scored results before winners are confirmed, and can step in where something is off.</p>
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>When do we find out?</summary>
+      <div class="a">
+        <p><b>4:30 – 5:00 PM the same day</b>, at the Innovation Block Party. Scoring and review happen between noon and then.</p>
+      </div>
+    </details>
+
+      </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div><b style="color:var(--ink)">FMX AI Hackathon</b> · October 20 · 8:00 AM – 12:00 PM</div>
+    <nav>
+      <a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#submission">Submission</a>
+      <a href="#rubric">Rubric</a><a href="#mentors">Mentors</a><a href="#prizes">Prizes</a><a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ---------- MENTOR DATA (placeholders — swap for real people) ---------- */
+const MENTORS = [
+  {n:"Rishad Usmani, MD",          r:"Family Medicine",    g:["#00e5ff","#7c5cff"]},
+  {n:"Michael Hobbs, MD",          r:"Pediatrics",         g:["#ff3d81","#ffb020"]},
+  {n:"David Hardin, MD",           r:"Internal Medicine",  g:["#7c5cff","#00e5ff"]},
+  {n:"Andrew Schutzbank, MD, MPH", r:"Internal Medicine",  g:["#4ade80","#00e5ff"]},
+  {n:"Michael Turken, MD, MPH",    r:"Internal Medicine",  g:["#ffb020","#ff3d81"]},
+  {n:"David Nichols, MD",          r:"Family Medicine",    g:["#00e5ff","#4ade80"]},
+  {n:"Jung Hoon Son, MD",          r:"Pathology",          g:["#7c5cff","#ff3d81"]},
+  {n:"Sudeep Bansal, MD",          r:"Internal Medicine",  g:["#00b8d4","#6d4aff"]},
+  {n:"Nupur Garg, MD, DipABLM",    r:"Emergency Medicine", g:["#ff3d81","#7c5cff"]},
+  {n:"Kat Jong, MD",               r:"Psychiatry",         g:["#00e5ff","#ff3d81"]},
+  {n:"Kalie Dove-Maguire, MD",     r:"Emergency Medicine", g:["#4ade80","#ffb020"]}
+];
+
+/* generative avatar: gradient tile + initials + subtle geometry */
+function avatar(m,i){
+  const parts = m.n.replace(/,.*$/,'').replace(/^Dr\.\s*/,'').split(/\s+/).filter(Boolean);
+  const ini = parts.length > 1 ? parts[0][0] + parts[parts.length-1][0] : parts[0].slice(0,2);
+  const [a,b] = m.g;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+    <defs>
+      <linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/>
+      </linearGradient>
+      <clipPath id="c${i}"><rect width="100" height="100" rx="22"/></clipPath>
+    </defs>
+    <g clip-path="url(#c${i})">
+      <rect width="100" height="100" fill="url(#g${i})"/>
+      <circle cx="${18+((i*23)%60)}" cy="${14+((i*31)%40)}" r="34" fill="#ffffff" opacity=".14"/>
+      <circle cx="${86-((i*17)%50)}" cy="${92-((i*13)%30)}" r="26" fill="#06060c" opacity=".16"/>
+      <rect x="0" y="0" width="100" height="100" fill="#06060c" opacity=".10"/>
+      <text x="50" y="50" text-anchor="middle" dominant-baseline="central"
+        font-family="ui-monospace,Menlo,monospace" font-size="34" font-weight="700"
+        fill="#06060c" opacity=".92" letter-spacing="1">${ini}</text>
+    </g>
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+document.getElementById('mentor-grid').innerHTML = MENTORS.map((m,i)=>{
+  const tags = (m.t||[]).map(t=>{
+    if(t==="T1") return '<span class="tk1">Track 1</span>';
+    if(t==="T2") return '<span class="tk2">Track 2</span>';
+    return `<span>${t}</span>`;
+  }).join('');
+  return `<article class="m${m.r?'':' pending'}">
+    <img class="av" src="${avatar(m,i)}" alt="${m.n}" width="66" height="66">
+    <div class="nm">${m.u ? `<a href="${m.u}" target="_blank" rel="noopener">${m.n}</a>` : m.n}</div>
+    <div class="rl">${m.r || 'Specialty to be confirmed'}</div>
+    ${m.b ? `<p class="bl">${m.b}</p>` : ''}
+    ${tags ? `<div class="tags">${tags}</div>` : ''}
+  </article>`;
+}).join('');
+
+/* ---------- ROUTER ---------- */
+const PAGES = ['home','tracks','schedule','submission','rubric','mentors','prizes','faq'];
+const TITLES = {home:'FMX AI Hackathon — Oct 20',tracks:'Tracks',schedule:'Schedule',
+  submission:'Submission',rubric:'Scoring Rubric',mentors:'Mentors',prizes:'Prizes',faq:'FAQ'};
+function route(){
+  const raw = (location.hash||'#home').slice(1);
+  let id = raw, anchor = null;
+  if(!PAGES.includes(id)){
+    // in-page anchor (e.g. #faq-teams): find its owning page section
+    const el = document.getElementById(raw);
+    const sec = el && el.closest('.page');
+    if(sec){ id = sec.id.replace(/^p-/,''); anchor = el; }
+    else { id = 'home'; }
+  }
+  PAGES.forEach(p=>document.getElementById('p-'+p).classList.toggle('on', p===id));
+  document.querySelectorAll('nav.links a').forEach(a=>
+    a.classList.toggle('on', a.getAttribute('href')==='#'+id));
+  document.getElementById('links').classList.remove('open');
+  document.title = id==='home' ? TITLES.home : TITLES[id]+' — FMX AI Hackathon';
+  if(anchor){
+    requestAnimationFrame(()=>anchor.scrollIntoView({behavior:'smooth',block:'start'}));
+  } else {
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+}
+window.addEventListener('hashchange', route);
+/* ---------- THEME TOGGLE ---------- */
+const root = document.documentElement;
+document.getElementById('tt').addEventListener('click', ()=>{
+  root.setAttribute('data-theme', root.getAttribute('data-theme')==='light' ? 'dark' : 'light');
+});
+if(window.matchMedia){
+  window.matchMedia('(prefers-color-scheme: light)')
+    .addEventListener('change', e => root.setAttribute('data-theme', e.matches?'light':'dark'));
+}
+
+document.getElementById('burger').addEventListener('click', ()=>
+  document.getElementById('links').classList.toggle('open'));
+route();
+</script>
+</body>
+</html>
