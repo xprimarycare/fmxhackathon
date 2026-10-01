@@ -14,6 +14,7 @@ document.documentElement.setAttribute('data-theme',
 :root{
   /* ---- DARK (default) ---- */
   --bg:#07070d;
+  --on-pg:#06060c;
   --bg-2:#0c0c17;
   --solid:#0a0a14;
   --nav-bg:rgba(7,7,13,.72);
@@ -49,6 +50,7 @@ document.documentElement.setAttribute('data-theme',
 }
 :root[data-theme="light"]{
   --bg:#ffffff;
+  --on-pg:#ffffff;
   --bg-2:#f7f8fc;
   --solid:#ffffff;
   --nav-bg:rgba(255,255,255,.84);
@@ -307,16 +309,30 @@ td.pts{font-family:var(--mono);font-weight:700;color:var(--c1);width:74px;font-s
 .m .tags span.tbc{border-style:dashed;color:var(--ink-3)}
 .m .tags span.tk2{color:var(--c3s);border-color:color-mix(in srgb, var(--c3) 30%, transparent);background:color-mix(in srgb, var(--c3) 9%, transparent)}
 
+/* ============ SPONSORS ============ */
+.sponsors{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.sp{display:flex;align-items:center;justify-content:center;height:128px;padding:26px 30px;border-radius:16px;
+  background:#ffffff;border:1px solid var(--line);transition:.2s;text-decoration:none}
+.sp:hover{transform:translateY(-3px);box-shadow:0 12px 30px -14px rgba(0,0,0,.35)}
+.sp img{max-width:100%;max-height:58px;object-fit:contain;display:block}
+.sp .nm{font-size:22px;font-weight:700;letter-spacing:-.02em;color:#1b2030}
+
 /* ============ PRIZES ============ */
 .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
 .pz{position:relative;border-radius:18px;padding:30px 26px;border:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(var(--tint),.055),rgba(var(--tint),.015));text-align:center;overflow:hidden}
+  background:linear-gradient(180deg,rgba(var(--tint),.055),rgba(var(--tint),.015));text-align:center;overflow:hidden;display:flex;flex-direction:column}
 .pz::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--pg)}
 .pz .rank{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
 .pz .trophy{font-size:34px;line-height:1;margin:14px 0 10px}
 .pz h3{font-size:21px;margin-bottom:6px}
-.pz .amt{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:-.01em;margin:12px 0 0;
-  padding:10px;border-radius:10px;background:rgba(var(--tint),.05);border:1px dashed var(--line-2);color:var(--ink-2)}
+.pz > p{margin-bottom:22px !important}
+.pz .perks{list-style:none;margin:14px 0 0;padding:0;min-height:22px}
+.pz .perks li{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:8px}
+.pz .perks li::before{content:"+";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;
+  background:var(--pg);color:var(--on-pg);font-family:var(--mono);font-size:12px;font-weight:800;line-height:1}
+.pz .amt{margin:auto 0 0;padding:16px 12px 15px;border-radius:14px;background:var(--pg);color:var(--on-pg);
+  box-shadow:0 10px 30px -12px color-mix(in srgb, var(--c3) 55%, transparent)}
+.pz .amt .v{display:block;font-family:var(--mono);font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1.05}
 .pz1{--pg:linear-gradient(90deg,var(--c1),var(--c2))}
 .pz2{--pg:linear-gradient(90deg,var(--c3),var(--amber))}
 .pz3{--pg:linear-gradient(90deg,#ffd24a,var(--c3) 50%,var(--c2))}
@@ -428,6 +444,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
       <a href="#rubric">Rubric</a>
       <a href="#mentors">Mentors</a>
       <a href="#prizes">Prizes</a>
+      <a href="#sponsors">Sponsors</a>
       <a href="#faq">FAQ</a>
     </nav>
     <button class="tt" id="tt" aria-label="Switch colour theme" title="Switch colour theme">
@@ -841,7 +858,6 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
     <div class="eyebrow">Prizes</div>
     <h1>Three awards.</h1>
     <p class="lead">One winner in each track, scored only against the other teams in that track — plus one award that ignores tracks entirely and goes to whatever made us sit up. Announced <b style="color:var(--ink)">Thursday, October 22, 3:30 – 5:00 PM at the Main Stage Event</b> in the Karl Dean Ballroom.</p>
-    <div style="margin-top:18px"><span class="tbd">◆ Prize values TBD</span></div>
   </div>
 
   <div class="wrap sec-sm">
@@ -851,21 +867,24 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
         <div class="trophy">🩺</div>
         <h3>Patient Empowerment Winner</h3>
         <p style="font-size:14px;margin:0">Highest total rubric score among Track 1 teams. The build that most convincingly gives a patient more knowledge, agency, or control.</p>
-        <div class="amt">Prize — TBD</div>
+        <div class="amt"><span class="v">$1,000</span></div>
+        <ul class="perks"><li>Up to 5 free FMX 2027 registrations</li></ul>
       </div>
       <div class="pz pz2">
         <div class="rank">Track 02</div>
         <div class="trophy">⚕️</div>
         <h3>Clinical Team Empowerment Winner</h3>
         <p style="font-size:14px;margin:0">Highest total rubric score among Track 2 teams. The build that most convincingly gives a physician or care team their day back.</p>
-        <div class="amt">Prize — TBD</div>
+        <div class="amt"><span class="v">$1,000</span></div>
+        <ul class="perks"><li>Up to 5 free FMX 2027 registrations</li></ul>
       </div>
       <div class="pz pz3">
         <div class="rank">Both tracks</div>
         <div class="trophy">🤯</div>
         <h3>The "OMG This Is So Cool" Award</h3>
         <p style="font-size:14px;margin:0">For the build that made the room stop scrolling. Not necessarily the most rigorous or the most deployable — the one that made us stop and ask "wait, how?"</p>
-        <div class="amt">Prize — TBD</div>
+        <div class="amt"><span class="v">$1,000</span></div>
+        <ul class="perks"></ul>
       </div>
     </div>
 
@@ -880,10 +899,25 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
       <div class="card">
         <h3>How the "OMG" award is picked</h3>
         <p style="font-size:14.5px;margin:0">Deliberately not from the rubric. Once scoring is done, the organizers watch back the submissions and pick the one that genuinely surprised them. Ambition, audacity, and technical nerve all count.</p>
-        <div style="margin-top:18px"><span class="tbd">Values announced at the Main Stage Event</span></div>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ================= SPONSORS ================= -->
+<section class="page" id="p-sponsors">
+  <div class="wrap phead">
+    <div class="eyebrow">Sponsors</div>
+    <h1>Meet the <span class="grad">sponsors</span>.</h1>
+    <p class="lead">The FMX Hackathon is an AAFP PCIN event made possible by organizations committed to advancing innovation in primary care.</p>
+  </div>
+  <div class="wrap sec-sm">
+    <div class="sponsors" id="sponsor-grid"></div>
+    <div class="callout" style="margin-top:38px">
+      <b>A neutral, clinician-centered room</b>
+      <p>In alignment with AAFP's principles, the Hackathon is intentionally designed to maintain a neutral, clinician-centered environment. Sponsors do not promote products or services during the event.</p>
+    </div>
   </div>
 </section>
 
@@ -1150,12 +1184,27 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
     <div><b style="color:var(--ink)">FMX AI Hackathon</b> · October 20 · 8:00 AM – 12:00 PM</div>
     <nav>
       <a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#submission">Submission</a>
-      <a href="#rubric">Rubric</a><a href="#mentors">Mentors</a><a href="#prizes">Prizes</a><a href="#faq">FAQ</a>
+      <a href="#rubric">Rubric</a><a href="#mentors">Mentors</a><a href="#prizes">Prizes</a><a href="#sponsors">Sponsors</a><a href="#faq">FAQ</a>
     </nav>
   </div>
 </footer>
 
 <script>
+/* ---------- SPONSOR DATA (add logo:"img/sponsors/<file>" once logos are in) ---------- */
+const SPONSORS = [
+  {n:"Elation", logo:"img/sponsors/elation.png"},
+  {n:"Doximity", logo:"img/sponsors/doximity.png"},
+  {n:"Heidi", logo:"img/sponsors/heidi.png"},
+  {n:"Abstractive Health", logo:"img/sponsors/abstractive-health.png"},
+  {n:"Beacon Health", logo:"img/sponsors/beacon-health.png"},
+  {n:"AMBOSS", logo:"img/sponsors/amboss.png"}
+];
+document.getElementById('sponsor-grid').innerHTML = SPONSORS.map(sp=>{
+  const inner = sp.logo ? `<img src="${sp.logo}" alt="${sp.n}">` : `<span class="nm">${sp.n}</span>`;
+  return sp.u ? `<a class="sp" href="${sp.u}" target="_blank" rel="noopener" title="${sp.n}">${inner}</a>`
+              : `<div class="sp" title="${sp.n}">${inner}</div>`;
+}).join('');
+
 /* ---------- FACILITATOR DATA ---------- */
 const FACILITATORS = [
   {n:"Paulius Mui, MD",            r:"Family Medicine",   badge:"Facilitator",    g:["#00e5ff","#7c5cff"], u:"https://www.linkedin.com/in/pauliusmui/", p:"img/mentors/mui.jpg",
@@ -1230,9 +1279,9 @@ function mentorCard(m,i){
 document.getElementById('mentor-grid').innerHTML = FACILITATORS.concat(MENTORS).map(mentorCard).join('');
 
 /* ---------- ROUTER ---------- */
-const PAGES = ['home','tracks','schedule','submission','rubric','mentors','prizes','faq'];
+const PAGES = ['home','tracks','schedule','submission','rubric','mentors','prizes','sponsors','faq'];
 const TITLES = {home:'FMX AI Hackathon — Oct 20',tracks:'Tracks',schedule:'Schedule',
-  submission:'Submission',rubric:'Scoring Rubric',mentors:'Mentors',prizes:'Prizes',faq:'FAQ'};
+  submission:'Submission',rubric:'Scoring Rubric',mentors:'Mentors',prizes:'Prizes',sponsors:'Sponsors',faq:'FAQ'};
 function route(){
   const raw = (location.hash||'#home').slice(1);
   let id = raw, anchor = null;
