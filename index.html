@@ -314,6 +314,8 @@ td.pts{font-family:var(--mono);font-weight:700;color:var(--c1);width:74px;font-s
 .sp{display:flex;align-items:center;justify-content:center;height:128px;padding:26px 30px;border-radius:16px;
   background:#ffffff;border:1px solid var(--line);transition:.2s;text-decoration:none}
 .sp:hover{transform:translateY(-3px);box-shadow:0 12px 30px -14px rgba(0,0,0,.35)}
+a.sp{text-decoration:none;cursor:pointer}
+a.sp:focus-visible{outline:2px solid var(--c1);outline-offset:3px}
 .sp img{max-width:100%;max-height:58px;object-fit:contain;display:block}
 .sp .nm{font-size:22px;font-weight:700;letter-spacing:-.02em;color:#1b2030}
 
@@ -418,6 +420,123 @@ details.q .a li{margin-bottom:6px}
 details.q .a b{color:var(--ink)}
 details.q .a a{color:var(--c1)}
 
+/* submission CTA */
+.subcta{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;
+  padding:24px 26px;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(135deg,color-mix(in srgb, var(--c1) 11%, transparent),color-mix(in srgb, var(--c2) 11%, transparent))}
+.subcta .txt{flex:1 1 270px;min-width:0}
+.subcta b{display:block;font-size:16.5px;letter-spacing:-.015em;color:var(--ink);margin-bottom:5px}
+.subcta p{margin:0;font-size:13.8px;color:var(--ink-2);line-height:1.5}
+.subcta-note{flex:1 0 100%;margin:2px 0 0;padding-top:14px;border-top:1px solid var(--line-2);
+  font-size:13.2px;color:var(--ink-3);line-height:1.5}
+.subcta-note b{display:inline;font-size:inherit;color:var(--ink-2);margin:0}
+.subcta-note a{color:var(--c1);text-decoration:none;border-bottom:1px solid color-mix(in srgb, var(--c1) 45%, transparent)}
+.subcta-note a:hover{border-bottom-color:var(--c1)}
+.btn-xl{font-size:16px;padding:17px 30px;border-radius:13px;flex:none}
+@media(max-width:560px){.btn-xl{width:100%}}
+
+/* ============ PROMPT BUILDER ============ */
+.pb-note{display:flex;gap:11px;align-items:flex-start;background:color-mix(in srgb, var(--amber) 11%, transparent);
+  border:1px solid color-mix(in srgb, var(--amber) 32%, transparent);color:var(--ink-2);
+  border-radius:12px;padding:13px 16px;font-size:13.8px;line-height:1.5;margin-bottom:26px}
+.pb-note b{color:var(--ink)}
+.pb-note span:first-child{color:var(--amber);flex:none;font-size:14px;line-height:1.5}
+
+.pb-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:22px;align-items:start}
+@media(max-width:940px){.pb-grid{grid-template-columns:1fr}}
+
+.pb-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:2px 24px 20px;min-width:0}
+.pb-fs{border:0;margin:0;padding:22px 0;border-bottom:1px solid var(--line-2);display:grid;gap:15px}
+.pb-fs:last-of-type{border-bottom:0}
+.pb-fs legend{display:contents}
+.pb-sh{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.pb-step{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--ink-3)}
+.pb-sh h3{margin:0;font-size:18px;letter-spacing:-.02em}
+.pb-sh .pb-aside{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--c1)}
+.pb-form label,.pb-lbl{display:block;font-weight:650;font-size:13.5px;margin-bottom:7px;color:var(--ink)}
+.pb-hint{display:block;font-weight:400;color:var(--ink-3);font-size:12.8px;margin-top:2px}
+.pb-form input[type=text],.pb-form textarea{width:100%;font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--ink);
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px;transition:.15s}
+.pb-form textarea{min-height:76px;max-height:300px;resize:vertical;overflow-y:auto}
+.pb-form input:focus,.pb-form textarea:focus{outline:none;border-color:var(--c1);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--c1) 18%, transparent)}
+.pb-form ::placeholder{color:var(--ink-3);opacity:.75}
+.pb-two{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:620px){.pb-two{grid-template-columns:1fr}}
+
+.pb-example{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:20px 0 2px;padding:14px 16px;
+  border:1px dashed var(--line-2);border-radius:12px;background:var(--panel)}
+.pb-example p{margin:0;font-size:13.6px;color:var(--ink-2);flex:1 1 220px}
+.pb-example b{color:var(--ink)}
+.pb-exbtn{font-family:var(--sans);font-weight:650;font-size:13.5px;border-radius:10px;padding:10px 15px;cursor:pointer;
+  background:var(--panel-2);color:var(--ink);border:1px solid var(--line-2);transition:.16s;white-space:nowrap}
+.pb-exbtn:hover{border-color:var(--c1);color:var(--c1);background:color-mix(in srgb, var(--c1) 9%, transparent)}
+
+.pb-tracks{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:620px){.pb-tracks{grid-template-columns:1fr}}
+.pb-tracks button{display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;font-family:var(--sans);
+  color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 14px;transition:.16s}
+.pb-tracks button:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.pb-tracks .pb-ic{font-size:22px;line-height:1;flex:none}
+.pb-tracks b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.pb-tracks .pb-tick{margin-left:auto;flex:none;width:21px;height:21px;border-radius:50%;border:1px solid var(--line-2);
+  display:grid;place-items:center;font-size:11px;font-weight:800;color:transparent}
+.pb-tracks button[aria-pressed="true"]{border-color:transparent;background:var(--grad);color:var(--on-grad)}
+.pb-tracks button[aria-pressed="true"] .pb-tick{background:var(--on-grad);border-color:transparent;color:var(--c2)}
+
+.pb-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:4px}
+.pb-seg.pb-three{grid-template-columns:repeat(3,1fr)}
+.pb-seg button{font-family:var(--sans);font-weight:650;font-size:13.5px;color:var(--ink-2);background:transparent;
+  border:0;border-radius:8px;padding:9px 8px;cursor:pointer;transition:.14s}
+.pb-seg button:hover{color:var(--ink)}
+.pb-seg button[aria-pressed="true"]{background:var(--panel-2);color:var(--c1)}
+
+.pb-chips{display:flex;flex-wrap:wrap;gap:7px}
+.pb-chip{font-family:var(--sans);font-weight:500;font-size:12.8px;color:var(--ink-2);background:var(--panel);
+  border:1px solid var(--line);border-radius:100px;padding:8px 13px;cursor:pointer;transition:.15s}
+.pb-chip:hover{border-color:var(--c1);color:var(--c1)}
+.pb-chip[aria-pressed="true"]{background:var(--c1);color:var(--on-grad);border-color:var(--c1)}
+
+.pb-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px}
+.pb-sw{display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:9px 11px;cursor:pointer;font-family:var(--sans);font-weight:500;font-size:12.8px;color:var(--ink);text-align:left;transition:.15s}
+.pb-sw:hover{border-color:var(--line-2)}
+.pb-sw[aria-pressed="true"]{border-color:var(--c1);box-shadow:0 0 0 3px color-mix(in srgb, var(--c1) 16%, transparent)}
+.pb-dots{display:flex;flex:none}
+.pb-dots i{width:14px;height:14px;border-radius:50%;border:1px solid rgba(128,128,128,.35);margin-left:-4px}
+.pb-dots i:first-child{margin-left:0}
+
+.pb-check{display:flex;gap:10px;align-items:flex-start;font-size:13.8px;color:var(--ink-2);cursor:pointer;line-height:1.5}
+.pb-check input{margin-top:3px;accent-color:var(--c1);flex:none}
+
+/* prompt panel — intentionally dark in both themes, like a terminal */
+.pb-out{position:sticky;top:76px;border-radius:var(--radius);overflow:hidden;min-width:0;
+  background:#0a0f1a;border:1px solid rgba(255,255,255,.1)}
+@media(max-width:940px){.pb-out{position:static}}
+.pb-out-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.pb-out-top b{font-size:14.5px;color:#eef3f8;letter-spacing:-.01em}
+.pb-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#6b7c8f}
+.pb-pre{margin:0;padding:16px;max-height:min(58vh,560px);overflow:auto;font-family:var(--mono);
+  font-size:12.2px;line-height:1.62;white-space:pre-wrap;word-break:break-word;color:#d7e1ec}
+.pb-pre .pb-v{color:#6fe3ff}
+.pb-pre .pb-e{color:#8e97a8;font-style:italic}
+.pb-actions{display:flex;flex-wrap:wrap;gap:9px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);background:#121b29}
+.pb-btn{font-family:var(--sans);font-weight:650;font-size:14px;border-radius:10px;padding:12px 15px;cursor:pointer;
+  border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;transition:.16s}
+.pb-btn.pb-go{flex:1 1 170px;background:linear-gradient(100deg,#00e5ff,#7c5cff 55%,#ff3d81);color:#06060c}
+.pb-btn.pb-go:hover{filter:brightness(1.08)}
+.pb-btn.pb-ghost{background:transparent;color:#d7e1ec;border-color:rgba(255,255,255,.18)}
+.pb-btn.pb-ghost:hover{background:rgba(255,255,255,.07)}
+.pb-after{padding:14px 17px 17px;font-size:12.9px;color:#8e97a8;line-height:1.6;border-top:1px solid rgba(255,255,255,.08)}
+.pb-after b{color:#d7e1ec;font-weight:650}
+.pb-after ol{margin:7px 0 0;padding-left:18px}
+.pb-after li{margin-bottom:5px}
+.pb-after code{font-family:var(--mono);font-size:11.8px;background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;color:#d7e1ec}
+
+.pb-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+  padding:11px 18px;border-radius:10px;font-weight:650;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:80}
+.pb-toast.pb-show{opacity:1}
+
 /* footer */
 footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;position:relative;z-index:1}
 .foot{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;
@@ -440,10 +559,11 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
       <a href="#home">Home</a>
       <a href="#tracks">Tracks</a>
       <a href="#schedule">Schedule</a>
-      <a href="#submission">Submission</a>
-      <a href="#rubric">Rubric</a>
-      <a href="#mentors">Mentors</a>
       <a href="#prizes">Prizes</a>
+      <a href="#rubric">Rubric</a>
+      <a href="#builder">Prompt Builder</a>
+      <a href="#submission">Submission</a>
+      <a href="#mentors">Mentors</a>
       <a href="#sponsors">Sponsors</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -468,7 +588,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
     <div class="facts">
       <div class="fact"><div class="k">Date</div><div class="v">Oct 20</div></div>
       <div class="fact"><div class="k">Time</div><div class="v">8AM–12PM</div></div>
-      <div class="fact"><div class="k">Participants</div><div class="v">100</div></div>
+      <div class="fact"><div class="k">Participants</div><div class="v">Up to 100</div></div>
     </div>
   </div>
 
@@ -522,7 +642,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
       </div>
       <div class="shot">
         <div class="t">8:30 – 9:00</div>
-        <div><h4>Team Formation &amp; Problem Selection</h4><p>Find your team and choose the problem you're solving.</p></div>
+        <div><h4>Team Formation &amp; Problem Selection</h4><p>An icebreaker to find teammates and start ideating on problems you'd like to solve.</p></div>
       </div>
       <div class="shot">
         <div class="t">9:00 – 11:30</div>
@@ -546,7 +666,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
   <div class="wrap phead">
     <div class="eyebrow">Challenge briefs</div>
     <h1>Two tracks.</h1>
-    <p class="lead">Pick one track during problem selection and stay in it — scoring happens within tracks, and there's a winner in each. Both briefs are deliberately wide. Your job between 8:30 and 9:00 is to make one of them narrow enough to build.</p>
+    <p class="lead">Pick one track during problem selection and stay in it — scoring happens within tracks, and there's a winner in each. Both briefs are deliberately wide.</p>
   </div>
 
   <div class="wrap sec-sm">
@@ -596,6 +716,123 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
   </div>
 </section>
 
+<!-- ================= PROMPT BUILDER ================= -->
+<section class="page" id="p-builder">
+  <div class="wrap phead">
+    <div class="eyebrow">Prompt builder</div>
+    <h1>From a problem to a <span class="grad">clickable prototype</span>.</h1>
+    <p class="lead">Answer a few questions about the problem you're solving. This writes the prompt for you — paste it into whichever AI tool you're using and you'll get back a single page you can click through on camera.</p>
+    <p class="lead" style="margin-top:14px">Just enough direction to start experimenting.</p>
+    <p class="lead" style="margin-top:14px">The prompt is built around the <a href="#submission" style="color:var(--c1)">three-minute video structure</a>, so the screens line up with what you'll need to say — and you get a timestamped narration script back alongside the prototype.</p>
+  </div>
+
+  <div class="wrap sec-sm">
+    <div class="pb-note">
+      <span aria-hidden="true">◆</span>
+      <span><b>Use made-up patients.</b> Whatever you type here goes to an AI tool, so invent the names and details. The prompt also tells the AI to label everything in the demo as fictional.</span>
+    </div>
+
+    <div class="pb-grid">
+      <form class="pb-form" id="pb-f" autocomplete="off">
+
+        <div class="pb-example">
+          <p><b>Not sure where to start?</b> Load a worked example for your track, then edit it into your own problem.</p>
+          <button type="button" class="pb-exbtn" id="pb-example">Load an example</button>
+        </div>
+
+        <fieldset class="pb-fs">
+          <legend><span class="pb-sh"><span class="pb-step">01</span><h3>Your track</h3></span></legend>
+          <div class="pb-tracks" role="group" aria-label="Track">
+            <button type="button" id="pb-t-team" data-track="team" aria-pressed="true"><span class="pb-ic" aria-hidden="true">⚕️</span><span><b>Clinical Team Empowerment</b></span><span class="pb-tick" aria-hidden="true">✓</span></button>
+            <button type="button" id="pb-t-pt" data-track="patient" aria-pressed="false"><span class="pb-ic" aria-hidden="true">🩺</span><span><b>Patient Empowerment</b></span><span class="pb-tick" aria-hidden="true">✓</span></button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pb-fs">
+          <legend><span class="pb-sh"><span class="pb-step">02</span><h3>The problem</h3><span class="pb-aside">40 of 100 points</span></span></legend>
+          <div>
+            <label for="pb-moment">The moment that goes badly<span class="pb-hint">Pick one. Where are you, and what just happened?</span></label>
+            <textarea id="pb-moment" placeholder="4:50 PM, I sign an MRI order. Four days later it's denied because the PT notes were in an outside fax nobody attached."></textarea>
+          </div>
+          <div>
+            <label for="pb-who">Who it affects<span class="pb-hint">Name them — you, your MA, the patient</span></label>
+            <textarea id="pb-who" placeholder="Me, my MA who submits the request, and the patient waiting on the scan."></textarea>
+          </div>
+          <div>
+            <label for="pb-why">What people do about it today<span class="pb-hint">Optional — and why that isn't enough</span></label>
+            <textarea id="pb-why" placeholder="The MA attaches the visit note on the payer portal. She never saw the patient, so she can't tell what's missing."></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="pb-fs">
+          <legend><span class="pb-sh"><span class="pb-step">03</span><h3>Your idea</h3><span class="pb-aside">Optional</span></span></legend>
+          <div>
+            <label for="pb-idea">The idea in one sentence<span class="pb-hint">Leave this blank and the AI will propose one</span></label>
+            <textarea id="pb-idea" placeholder="When the order is signed, check the payer's criteria against the chart and ask about the one missing item."></textarea>
+          </div>
+          <div>
+            <label for="pb-core">The one interaction to show<span class="pb-hint">Optional — the single click that makes the point</span></label>
+            <input type="text" id="pb-core" placeholder="Tapping the missing exam finding turns the checklist green.">
+          </div>
+          <div class="pb-two">
+            <div>
+              <span class="pb-lbl">How many screens</span>
+              <div class="pb-seg pb-three" role="group" aria-label="Number of screens" id="pb-screens">
+                <button type="button" data-n="2" aria-pressed="false">2</button>
+                <button type="button" data-n="3" aria-pressed="true">3</button>
+                <button type="button" data-n="4" aria-pressed="false">4</button>
+              </div>
+            </div>
+            <div>
+              <span class="pb-lbl">Shown on</span>
+              <div class="pb-seg" role="group" aria-label="Device" id="pb-device">
+                <button type="button" data-d="desktop" aria-pressed="true">Desktop</button>
+                <button type="button" data-d="phone" aria-pressed="false">Phone</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pb-fs">
+          <legend><span class="pb-sh"><span class="pb-step">04</span><h3>Look and feel</h3></span></legend>
+          <div>
+            <span class="pb-lbl">Colours</span>
+            <div class="pb-swatches" id="pb-palettes"></div>
+          </div>
+          <div>
+            <span class="pb-lbl">Style</span>
+            <div class="pb-chips" id="pb-styles"></div>
+          </div>
+          <div>
+            <span class="pb-lbl">Extra screens</span>
+            <div style="display:grid;gap:9px">
+              <label class="pb-check" for="pb-x-story"><input type="checkbox" id="pb-x-story" checked> An opening screen that tells the "before" story <span class="pb-hint" style="display:inline;margin:0">— covers 0:00–0:30</span></label>
+              <label class="pb-check" for="pb-x-real"><input type="checkbox" id="pb-x-real" checked> A closing screen on adoption and barriers <span class="pb-hint" style="display:inline;margin:0">— covers 2:00–3:00</span></label>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <aside class="pb-out" aria-label="Generated prompt">
+        <div class="pb-out-top"><b>Your prompt</b><span class="pb-meta" id="pb-count"></span></div>
+        <pre class="pb-pre" id="pb-pre"></pre>
+        <div class="pb-actions">
+          <button type="button" class="pb-btn pb-go" id="pb-copy">Copy prompt</button>
+          <button type="button" class="pb-btn pb-ghost" id="pb-clear">Clear</button>
+        </div>
+        <div class="pb-after">
+          <b>Then:</b>
+          <ol>
+            <li>Paste it into your AI tool and send.</li>
+            <li>Click through what comes back. <b>Only seeing code?</b> Reply "show this as a rendered page" — or paste the code into a text file, save it as <code>prototype.html</code>, and double-click it.</li>
+            <li>Change one thing at a time: "make the button on screen 2 say Sign."</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ================= SCHEDULE ================= -->
 <section class="page" id="p-schedule">
   <div class="wrap phead">
@@ -619,13 +856,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
         <div class="time">8:30 – 9:00<small>30 min</small></div>
         <div class="body">
           <h4>Team Formation &amp; Problem Selection</h4>
-          <p>Find your team and choose the problem you're solving. With 100 participants in the room this is the highest-leverage half hour of the day, so use all of it.</p>
-          <div class="sub-h">Suggested rhythm</div>
-          <ul class="sub">
-            <li><b>8:30</b><span>Post your problem on the idea wall in one sentence, or go read what's already up there.</span></li>
-            <li><b>8:40</b><span>Teams of five form around problems.</span></li>
-            <li><b>8:50</b><span>Write down your problem and get ready to build a solution proposal.</span></li>
-          </ul>
+          <p>An icebreaker activity to help you find teammates and start ideating on problems you'd like to solve.</p>
         </div>
       </div>
 
@@ -640,7 +871,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
             <li><b>10:00</b><span>Ugly version of your core interaction working end to end. If it isn't, cut scope now rather than at 11:00.</span></li>
             <li><b>10:30</b><span><strong>Second mentor check.</strong> Show what you have, however rough. Last good moment to change direction.</span></li>
             <li><b>11:00</b><span><strong>Feature freeze.</strong> Stop building. Decide exactly what the video will show and in what order.</span></li>
-            <li><b>11:15</b><span>Rehearse your three minutes out loud once. Almost nobody does this and it is the single cheapest way to score better.</span></li>
+            <li><b>11:15</b><span>Start putting final touches on the concept.</span></li>
           </ul>
         </div>
       </div>
@@ -680,6 +911,15 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
     <div class="eyebrow">Submission instructions</div>
     <h1>Submit a <span class="grad">three-minute video</span>.</h1>
     <p class="lead">Every team submits one recorded video overview of what they built, with a shareable link, plus any supplemental files. The submission window is <b style="color:var(--ink)">11:30 – 12:00</b>.</p>
+
+    <div class="subcta" style="margin-top:30px">
+      <div class="txt">
+        <b>Submit here</b>
+        <p>One entry per team. You can edit your answers until the form closes at 12:00.</p>
+      </div>
+      <a class="btn btn-p btn-xl" href="https://forms.gle/ZmN8yVEqn7hQQnSo6" target="_blank" rel="noopener">Open the submission form →</a>
+      <p class="subcta-note"><b>Form not working?</b> Email your submission to <a href="mailto:paulius@xprimarycare.com?subject=FMX%20AI%20Hackathon%20submission">paulius@xprimarycare.com</a> instead — same deadline, same details.</p>
+    </div>
   </div>
 
   <div class="wrap sec-sm">
@@ -732,49 +972,77 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
 
     <div class="eyebrow">Required</div>
     <h2>What the form asks for.</h2>
+    <p>Eight questions, in this order. Only one of them takes any real thinking — draft question 5 before 11:30 and the rest is typing.</p>
     <div class="steps">
       <div class="step">
         <div>
-          <h4>Team &amp; track</h4>
-          <p style="margin:0;font-size:14.5px">Team name, every member's name and specialty, and your chosen track. List everyone — prizes follow this list.</p>
+          <h4>Your email</h4>
+          <p style="margin:0;font-size:14.5px">Whoever is submitting on behalf of the team. One entry per team.</p>
         </div>
       </div>
       <div class="step">
         <div>
-          <h4>Video link</h4>
-          <p style="margin:0;font-size:14.5px">A shareable Loom, Tella, or equivalent URL. Three minutes maximum.</p>
+          <h4>Team name</h4>
+          <p style="margin:0;font-size:14.5px">Anything you like. Pick it before 11:30 so you're not naming your team at 11:58.</p>
         </div>
       </div>
       <div class="step">
         <div>
-          <h4>Problem statement — 50 words max</h4>
-          <p style="margin:0;font-size:14.5px">One paragraph naming the specific user and the specific moment that goes wrong today. This is read first, before your video plays.</p>
+          <h4>Team member names</h4>
+          <p style="margin:0;font-size:14.5px">Everyone on the team — prizes follow this list. <b style="color:var(--ink)">The first person you list is the point of contact, and you'll need their mobile number</b>, so have it ready.</p>
         </div>
       </div>
       <div class="step">
         <div>
-          <h4>Supplemental files — optional</h4>
-          <p style="margin:0;font-size:14.5px">Anything that helps convey what you built:</p>
+          <h4>Your track</h4>
+          <p style="margin:0;font-size:14.5px">Patient Empowerment or Clinical Team Empowerment. One only — you're scored against the other teams in that track.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Problem, who benefits, and your solution</h4>
+          <p style="margin:0;font-size:14.5px">Three questions in one box, answered in two or three sentences total:</p>
           <ul>
-            <li>A live link to the prototype, or a repository</li>
-            <li>Your slide deck</li>
-            <li>Screenshots, workflow diagrams, or design files</li>
-            <li>Notes from anyone you tested it on during the morning</li>
+            <li>What problem are you solving?</li>
+            <li>Who benefits from your solution?</li>
+            <li>What is your solution?</li>
           </ul>
-          <p style="margin:10px 0 0;font-size:14.5px">Supplemental files are reviewed but never a substitute for the video.</p>
         </div>
       </div>
       <div class="step">
         <div>
-          <h4>Share your tech stack</h4>
-          <p style="margin:0;font-size:14.5px">List the models, tools, and templates you used.</p>
+          <h4>Which tools you used</h4>
+          <p style="margin:0;font-size:14.5px">A checklist of the common AI build tools, with an "Other" box. Tick everything you touched — using AI heavily is expected here, not penalised.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Link to your video</h4>
+          <p style="margin:0;font-size:14.5px">A shareable Loom, Tella, or equivalent URL, set so that anyone with the link can view it. Three minutes maximum.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h4>Link to any other files</h4>
+          <p style="margin:0;font-size:14.5px">Your prototype, slide deck, screenshots, workflow diagrams — anything that helps convey what you built.</p>
+          <p style="margin:10px 0 0;font-size:14.5px">Easiest approach: drop everything into one Google Drive folder, set it to "anyone with the link", and submit that single link. These are reviewed but never a substitute for the video.</p>
         </div>
       </div>
     </div>
 
     <div class="callout warn">
-      <b>Check your link before you submit</b>
-      <p>The single most common way to lose a morning's work: a video set to "only people in my organization." Open your own link in a private browsing window first. If it asks you to sign in, your video can't be reviewed.</p>
+      <b>Open every link in an incognito window first</b>
+      <p>The form asks for a video link, and optionally a link to your files. Before you paste either one in, open it in a private or incognito browser window — a window where you are not signed in to anything.</p>
+      <p>If it asks you to sign in, or says you need to request access, we can't open it either. A link set to "only people in my organization" is the single most common way to lose a morning's work.</p>
+    </div>
+
+    <div class="subcta" style="margin-top:26px">
+      <div class="txt">
+        <b>Ready to submit?</b>
+        <p>Links checked in an incognito window, video under three minutes, everyone on your team named.</p>
+      </div>
+      <a class="btn btn-p btn-xl" href="https://forms.gle/ZmN8yVEqn7hQQnSo6" target="_blank" rel="noopener">Open the submission form →</a>
+      <p class="subcta-note"><b>Form not working?</b> Email your submission to <a href="mailto:paulius@xprimarycare.com?subject=FMX%20AI%20Hackathon%20submission">paulius@xprimarycare.com</a> instead — same deadline, same details.</p>
     </div>
 
       </div>
@@ -999,15 +1267,14 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
       <summary>How do we form teams?</summary>
       <div class="a">
         <p>Team formation runs <b>8:30 – 9:00</b>, immediately after the keynote.</p>
-        <p>Write your problem on a card in one sentence and post it on the idea wall, or read what's already up there and go stand next to the one you'd want to fix. With 100 participants in the room, someone else has your problem.</p>
+        <p>It's an icebreaker activity — you'll meet people, find teammates, and start ideating on problems together. You don't need to arrive with an idea; most teams land on theirs during that half hour.</p>
       </div>
     </details>
 
     <details class="q">
       <summary>How big can a team be?</summary>
       <div class="a">
-        <p><b>Five participants per team.</b> Big enough to split the work across a two-and-a-half-hour build, small enough that nobody spends the morning waiting on a decision.</p>
-        <p>With 100 participants, that makes 20 teams.</p>
+        <p><b>2–5 participants per team.</b> Big enough to split the work across a two-and-a-half-hour build, small enough that nobody spends the morning waiting on a decision.</p>
       </div>
     </details>
 
@@ -1178,13 +1445,13 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
 </section>
 
 </main>
+<div class="pb-toast" id="pb-toast" role="status"></div>
 
 <footer>
   <div class="foot">
     <div><b style="color:var(--ink)">FMX AI Hackathon</b> · October 20 · 8:00 AM – 12:00 PM</div>
     <nav>
-      <a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#submission">Submission</a>
-      <a href="#rubric">Rubric</a><a href="#mentors">Mentors</a><a href="#prizes">Prizes</a><a href="#sponsors">Sponsors</a><a href="#faq">FAQ</a>
+      <a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#prizes">Prizes</a><a href="#rubric">Rubric</a><a href="#builder">Prompt Builder</a><a href="#submission">Submission</a><a href="#mentors">Mentors</a><a href="#sponsors">Sponsors</a><a href="#faq">FAQ</a>
     </nav>
   </div>
 </footer>
@@ -1192,12 +1459,12 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
 <script>
 /* ---------- SPONSOR DATA (add logo:"img/sponsors/<file>" once logos are in) ---------- */
 const SPONSORS = [
-  {n:"Elation", logo:"img/sponsors/elation.png"},
-  {n:"Doximity", logo:"img/sponsors/doximity.png"},
-  {n:"Heidi", logo:"img/sponsors/heidi.png"},
-  {n:"Abstractive Health", logo:"img/sponsors/abstractive-health.png"},
-  {n:"Beacon Health", logo:"img/sponsors/beacon-health.png"},
-  {n:"AMBOSS", logo:"img/sponsors/amboss.png"}
+  {n:"Elation",            logo:"img/sponsors/elation.png",            u:"https://www.elationhealth.com/"},
+  {n:"Doximity",           logo:"img/sponsors/doximity.png",           u:"https://www.doximity.com/"},
+  {n:"Heidi",              logo:"img/sponsors/heidi.png",              u:"https://www.heidihealth.com/"},
+  {n:"Abstractive Health", logo:"img/sponsors/abstractive-health.png", u:"https://www.abstractivehealth.com/"},
+  {n:"Beacon Health",      logo:"img/sponsors/beacon-health.png",      u:"https://www.beaconhealth.ai/"},
+  {n:"AMBOSS",             logo:"img/sponsors/amboss.png",             u:"https://www.amboss.com/us"}
 ];
 document.getElementById('sponsor-grid').innerHTML = SPONSORS.map(sp=>{
   const inner = sp.logo ? `<img src="${sp.logo}" alt="${sp.n}">` : `<span class="nm">${sp.n}</span>`;
@@ -1275,8 +1542,8 @@ function mentorCard(m,i){
 document.getElementById('mentor-grid').innerHTML = FACILITATORS.concat(MENTORS).map(mentorCard).join('');
 
 /* ---------- ROUTER ---------- */
-const PAGES = ['home','tracks','schedule','submission','rubric','mentors','prizes','sponsors','faq'];
-const TITLES = {home:'FMX AI Hackathon — Oct 20',tracks:'Tracks',schedule:'Schedule',
+const PAGES = ['home','tracks','schedule','prizes','rubric','builder','submission','mentors','sponsors','faq'];
+const TITLES = {home:'FMX AI Hackathon — Oct 20',tracks:'Tracks',builder:'Prompt Builder',schedule:'Schedule',
   submission:'Submission',rubric:'Scoring Rubric',mentors:'Mentors',prizes:'Prizes',sponsors:'Sponsors',faq:'FAQ'};
 function route(){
   const raw = (location.hash||'#home').slice(1);
@@ -1313,6 +1580,175 @@ if(window.matchMedia){
 document.getElementById('burger').addEventListener('click', ()=>
   document.getElementById('links').classList.toggle('open'));
 route();
+
+/* ---------- PROMPT BUILDER ---------- */
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!$('pb-f')) return;
+
+  const PALETTES=[
+    {id:"clinic",name:"Clinic blue",c:["#1F5FA8","#E3EDF8","#FFFFFF"],desc:"calm clinical blue (#1F5FA8) on white with light blue panels"},
+    {id:"sage",name:"Sage",c:["#2F6B57","#E4EFE9","#FAFBF8"],desc:"muted sage green (#2F6B57) on a soft off-white"},
+    {id:"warm",name:"Warm coral",c:["#D2553F","#FBE7E1","#FFFDFB"],desc:"friendly coral (#D2553F) accents on warm white"},
+    {id:"plum",name:"Plum",c:["#6A3D8F","#EFE7F6","#FFFFFF"],desc:"deep plum (#6A3D8F) accents on white"},
+    {id:"night",name:"Dark mode",c:["#7CC4FF","#1B2633","#0F161E"],desc:"dark mode: near-black background (#0F161E) with a sky-blue accent (#7CC4FF)"},
+    {id:"contrast",name:"High contrast",c:["#000000","#FFD400","#FFFFFF"],desc:"high contrast black on white with yellow (#FFD400) highlights and large text"}
+  ];
+  const STYLES=["Clean and clinical","Friendly and rounded","Looks like an EHR","Chat / messaging","Big buttons, plain words","Dashboard with one chart"];
+
+  const EXAMPLES={
+    team:{
+      moment:"4:52 PM on a Tuesday. I sign a lumbar MRI order for Maria, 54, with nine weeks of sciatica. Friday it comes back denied: 'no documentation of 6 weeks conservative therapy.' The PT notes were in an outside fax nobody attached.",
+      who:"Me, a family physician at a community health centre; my MA, who submits the prior auths; and Maria, who waits another two weeks for her scan.",
+      why:"My MA attaches my visit note on the payer portal. She never saw the patient, so she can't tell what's missing, and the denial lands days after I could have fixed it in thirty seconds.",
+      idea:"",core:""
+    },
+    patient:{
+      moment:"9:10 PM. A patient opens her results on her phone and sees 'TSH 7.8 — HIGH' with no comment attached. She searches it, finds thyroid cancer, and calls the after-hours line in tears. I see the message at 7 the next morning.",
+      who:"The patient, who lost a night to a borderline number; the on-call nurse who took the 9 PM call; and me, starting the next day already behind.",
+      why:"I'm supposed to release results with a comment, but between visits I'm releasing forty at a time and the comment box is the last thing I get to. Patients see the number long before they see any context.",
+      idea:"",core:""
+    }
+  };
+
+  const state={track:"team",screens:"3",device:"desktop",palette:"clinic",styles:new Set(["Clean and clinical"])};
+
+  function pressGroup(box,attr,val){[...box.querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed",b.dataset[attr]===val))}
+
+  function renderPalettes(){
+    const box=$("pb-palettes");
+    PALETTES.forEach(p=>{
+      const b=document.createElement("button");b.type="button";b.className="pb-sw";
+      b.setAttribute("aria-pressed",p.id===state.palette);
+      b.innerHTML='<span class="pb-dots">'+p.c.map(c=>'<i style="background:'+c+'"></i>').join("")+'</span>'+p.name;
+      b.onclick=()=>{state.palette=p.id;[...box.children].forEach((x,i)=>x.setAttribute("aria-pressed",PALETTES[i].id===p.id));build()};
+      box.appendChild(b);
+    });
+  }
+  function renderStyles(){
+    const box=$("pb-styles");
+    STYLES.forEach(s=>{
+      const b=document.createElement("button");b.type="button";b.className="pb-chip";b.textContent=s;
+      b.setAttribute("aria-pressed",state.styles.has(s));
+      b.onclick=()=>{state.styles.has(s)?state.styles.delete(s):state.styles.add(s);b.setAttribute("aria-pressed",state.styles.has(s));build()};
+      box.appendChild(b);
+    });
+  }
+
+  function setTrack(t){state.track=t;$("pb-t-team").setAttribute("aria-pressed",t==="team");$("pb-t-pt").setAttribute("aria-pressed",t==="patient");build()}
+  $("pb-t-team").onclick=()=>setTrack("team");
+  $("pb-t-pt").onclick=()=>setTrack("patient");
+  $("pb-screens").onclick=e=>{const b=e.target.closest("button");if(!b)return;state.screens=b.dataset.n;pressGroup($("pb-screens"),"n",b.dataset.n);build()};
+  $("pb-device").onclick=e=>{const b=e.target.closest("button");if(!b)return;state.device=b.dataset.d;pressGroup($("pb-device"),"d",b.dataset.d);build()};
+
+  const FIELDS=["pb-moment","pb-who","pb-why","pb-idea","pb-core"];
+  const TAS=["pb-moment","pb-who","pb-why","pb-idea"];
+  function grow(el){if(!el)return;el.style.height="auto";el.style.height=Math.min(el.scrollHeight+2,300)+"px"}
+  function growAll(){TAS.forEach(id=>grow($(id)))}
+  const v=id=>$(id).value.trim();
+  const MISSING="⟨not given — invent something realistic and specific⟩";
+
+  function build(){
+    const team=state.track==="team";
+    const trackName=team
+      ? "Clinical Team Empowerment (primary user: a clinician or care team member)"
+      : "Patient Empowerment (primary user: a patient or caregiver)";
+    const pal=PALETTES.find(p=>p.id===state.palette);
+    const n=+state.screens, story=$("pb-x-story").checked, real=$("pb-x-real").checked;
+    const idea=v("pb-idea"), core=v("pb-core");
+    const styles=[...state.styles].join(", ")||"clean and simple";
+
+    const cand=[[2,1,"The core interaction: the new tool at the exact moment the problem happens. This is where the user clicks"+(core?" — "+core:"")+"."]];
+    if(story) cand.push([1,2,"\"The moment\": the specific person, the specific moment, and a short 3–5 step \"what happens today\" timeline ending in the failure."]);
+    if(real) cand.push([5,3,"\"Would this get adopted?\": who uses it and when, who inside a practice would champion it, how it realistically gets picked up, who pays and out of which existing budget, three honest barriers to adoption, who benefits most, one next step after the hackathon, and a two-row table of what in this demo is real versus illustrative."]);
+    cand.push([4,4,"The result: what changed for the user, and who it got handed to if anyone, with a simple before-and-after."]);
+    cand.push([3,5,"A second step of the core interaction — a confirmation, or the hand-off to the next person."]);
+    const plan=cand.sort((a,b)=>a[1]-b[1]).slice(0,n).sort((a,b)=>a[0]-b[0]).map(c=>c[2]);
+
+    const text =
+"You are helping a team at a two-and-a-half-hour primary care hackathon build a clickable prototype for a 3-minute video demo. Judging rewards the clarity of the problem and the concept, not technical sophistication. Speed matters more than polish.\n\n"+
+"TRACK\n"+trackName+"\n\n"+
+"THE PROBLEM\n"+
+"- The moment that goes badly: "+(v("pb-moment")||MISSING)+"\n"+
+"- Who it affects: "+(v("pb-who")||MISSING)+"\n"+
+"- What people do about it today, and why that falls short: "+(v("pb-why")||"⟨not given — infer the usual workaround and why it fails⟩")+"\n\n"+
+"THE IDEA\n"+
+(idea ? idea : "⟨not given⟩ Pick ONE solution that follows directly from the problem above. It should work at the exact moment the problem happens, and it should not simply add another alert, dashboard, or chatbot. State it in one sentence at the top of your reply.")+"\n\n"+
+"HOW IT WILL BE SCORED (100 points, 20 each). Shape the idea and every screen to earn these:\n"+
+"1. Clinical problem insight — a specific patient or clinician in a specific moment, not a category like \"care coordination\". Show why the problem has survived this long and why today's workaround fails.\n"+
+"2. Solution quality and creativity — the idea follows directly from the problem, and it is clear exactly who would use it. Go beyond wrapping a chatbot around an existing task.\n"+
+"3. Workflow and real-world fit — where it lives in the day, who operates it, what it costs in attention, who pays and from which existing budget, and at least one hard adoption barrier (IT, trust, training, regulation, inertia) named honestly.\n"+
+"4. Prototype and video execution — clarity, not sophistication. Someone should be able to explain the idea back after watching once. Label what is real versus illustrative, and never overclaim.\n"+
+"5. Impact potential — who benefits most and why them, how far it could reach beyond one practice, and a credible next step after the hackathon.\n"+
+"Before building, check the idea against all five. If it is weak on one, change the idea rather than the wording.\n\n"+
+"SCREENS (exactly "+plan.length+", clickable, in this order)\n"+
+plan.map((p,i)=>(i+1)+". "+p).join("\n")+"\n"+
+"Add a simple nav bar with the screen names so the presenter can jump between them, and a \"Restart\" button on the last screen.\n\n"+
+"THE 3-MINUTE VIDEO THIS HAS TO SUPPORT\n"+
+"The team will screen-record a 3-minute video narrating this prototype. Design the screens so every segment has something concrete to show:\n"+
+"- 0:00\u20130:30 The problem \u2014 one specific clinical moment that goes badly today, with a named person, recognisable to a colleague within fifteen seconds.\n"+
+"- 0:30\u20132:00 The concept \u2014 the bulk of the time. Walking through what was built and narrating how it would work, showing the one core interaction rather than touring every screen.\n"+
+"- 2:00\u20132:30 Adoption \u2014 who it is for, who would champion it inside a practice, how it realistically gets picked up, who pays and out of which budget.\n"+
+"- 2:30\u20133:00 Barriers and what is next \u2014 what would stop it being adopted, which parts are illustrative, and one sentence on the next step.\n"+
+"Put the content for each segment on screen, in that order, so the presenter can simply click through while talking.\n\n"+
+"LOOK\n"+
+"- Colours: "+pal.desc+".\n"+
+"- Style: "+styles+".\n"+
+"- Lay it out for "+(state.device==="phone"?"a phone: centre a phone-sized frame about 390px wide on the page":"a laptop screen: max width about 1000px, centred")+".\n"+
+"- System fonts only. Large, readable text, because this will be screen-recorded.\n\n"+
+"HARD LIMITS (so this generates in a couple of minutes)\n"+
+"- ONE self-contained .html file with inline <style> and <script>. Under 400 lines.\n"+
+"- No frameworks, libraries, CDNs, external fonts, image files, icon packs, or build steps. Plain HTML, CSS and JS. Use emoji or simple CSS shapes for icons.\n"+
+"- No backend, API calls, AI calls, login, or real data. Everything is hardcoded and fictional.\n"+
+"- At most one or two interactive moments — a button, a few toggle chips, a checkbox. Everything else is static.\n"+
+"- Keep text short: a few words per label, one or two sentences per paragraph. No lorem ipsum.\n"+
+"- Put a thin banner at the top: \"Hackathon prototype — all data is fictional.\"\n"+
+"- Do not ask me questions first. Make reasonable assumptions and build it now.\n\n"+
+"WHAT TO GIVE ME BACK\n"+
+"1. One sentence: the idea.\n"+
+"2. The prototype as a RENDERED, clickable page I can use straight away, not code printed in the chat. If you can create artifacts, canvases, or live previews, put the complete HTML in one so it displays as a working page. If you cannot render it, give the complete HTML in one code block and tell me: \"Copy this into a text file, save it as prototype.html, and double-click it to open in your browser.\"\n"+
+"3. A narration script for the 3-minute video, in four timestamped blocks (0:00\u20130:30, 0:30\u20132:00, 2:00\u20132:30, 2:30\u20133:00). For each block: which screen to be on, what to click, and two or three sentences to say out loud. Keep the whole script speakable in three minutes at a natural pace \u2014 roughly 400 to 450 words in total.";
+
+    window.__pbPrompt=text;
+    const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    let html=esc(text);
+    html=html.replace(/⟨[^⟩]*⟩/g,m=>'<span class="pb-e">'+m+'</span>');
+    html=html.replace(/^(TRACK|THE PROBLEM|THE IDEA|HOW IT WILL BE SCORED[^\n]*|SCREENS[^\n]*|THE 3-MINUTE VIDEO[^\n]*|LOOK|HARD LIMITS[^\n]*|WHAT TO GIVE ME BACK)$/gm,m=>'<span class="pb-v">'+m+'</span>');
+    $("pb-pre").innerHTML=html;
+    $("pb-count").textContent=text.split(/\s+/).length+" words";
+  }
+
+  $("pb-f").addEventListener("input",e=>{if(e.target.tagName==="TEXTAREA")grow(e.target);build()});
+  $("pb-f").addEventListener("change",build);
+
+  function toast(msg){
+    const t=$("pb-toast");t.textContent=msg;t.classList.add("pb-show");
+    clearTimeout(window.__pbT);window.__pbT=setTimeout(()=>t.classList.remove("pb-show"),2400);
+  }
+
+  $("pb-copy").onclick=async()=>{
+    const t=window.__pbPrompt||"";
+    try{
+      await navigator.clipboard.writeText(t);
+      toast("Copied. Paste it into your AI tool.");
+    }catch(e){
+      const r=document.createRange();r.selectNodeContents($("pb-pre"));
+      const s=getSelection();s.removeAllRanges();s.addRange(r);
+      toast("Selected — press Ctrl/Cmd+C to copy.");
+    }
+  };
+  $("pb-clear").onclick=()=>{FIELDS.forEach(id=>$(id).value="");growAll();build();toast("Cleared.")};
+  $("pb-example").onclick=()=>{
+    const e=EXAMPLES[state.track];
+    $("pb-moment").value=e.moment;$("pb-who").value=e.who;$("pb-why").value=e.why;
+    $("pb-idea").value=e.idea;$("pb-core").value=e.core;
+    growAll();build();
+    toast("Example loaded — now edit it into your own problem.");
+    $("pb-moment").scrollIntoView({behavior:"smooth",block:"center"});
+  };
+
+  renderPalettes();renderStyles();growAll();build();
+})();
 </script>
 </body>
 </html>
