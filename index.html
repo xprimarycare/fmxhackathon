@@ -118,7 +118,7 @@ header.nav{
 .brand span{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-top:-2px}
 nav.links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
 nav.links a{
-  font-size:13.5px;color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:9px;
+  font-size:13.5px;color:var(--ink-2);text-decoration:none;padding:7px 9px;border-radius:9px;
   transition:.16s;white-space:nowrap;font-weight:500;
 }
 nav.links a:hover{color:var(--ink);background:var(--panel-2)}
@@ -142,6 +142,9 @@ nav.links a.on{color:var(--on-grad);background:linear-gradient(100deg,var(--c1),
   nav.links.open{display:flex}
   nav.links a{padding:11px 12px;font-size:15px}
 }
+
+/* ============ RECAP ============ */
+.recap-video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--av-shadow)}
 
 /* ============ PAGES ============ */
 .page{display:none;animation:in .38s cubic-bezier(.2,.7,.3,1)}
@@ -557,6 +560,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
     <button class="burger" id="burger" aria-label="Menu">☰</button>
     <nav class="links" id="links">
       <a href="#home">Home</a>
+      <a href="#recap">Recap</a>
       <a href="#tracks">Tracks</a>
       <a href="#schedule">Schedule</a>
       <a href="#prizes">Prizes</a>
@@ -1120,6 +1124,22 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
   </div>
 </section>
 
+<!-- ================= RECAP ================= -->
+<section class="page" id="p-recap">
+  <div class="wrap phead">
+    <div class="eyebrow">Recap</div>
+    <h1>That's a <span class="grad">wrap</span>.</h1>
+    <p class="lead">Four hours, two tracks, and a room full of family physicians building what primary care needs next. Here's the morning in under a minute.</p>
+  </div>
+  <div class="wrap sec-sm">
+    <video class="recap-video" id="recap-video" controls playsinline preload="metadata" poster="img/recap-poster.jpg">
+      <source src="video/fmx-recap.mp4" type="video/mp4">
+      Your browser can't play this video. <a href="video/fmx-recap.mp4">Download the recap (MP4)</a>.
+    </video>
+    <div class="cta-row" style="margin-top:28px"><a class="btn btn-s" href="#prizes">See the prizes →</a></div>
+  </div>
+</section>
+
 <!-- ================= PRIZES ================= -->
 <section class="page" id="p-prizes">
   <div class="wrap phead">
@@ -1451,7 +1471,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:38px 0 46px;posi
   <div class="foot">
     <div><b style="color:var(--ink)">FMX AI Hackathon</b> · October 20 · 8:00 AM – 12:00 PM</div>
     <nav>
-      <a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#prizes">Prizes</a><a href="#rubric">Rubric</a><a href="#builder">Prompt Builder</a><a href="#submission">Submission</a><a href="#mentors">Mentors</a><a href="#sponsors">Sponsors</a><a href="#faq">FAQ</a>
+      <a href="#recap">Recap</a><a href="#tracks">Tracks</a><a href="#schedule">Schedule</a><a href="#prizes">Prizes</a><a href="#rubric">Rubric</a><a href="#builder">Prompt Builder</a><a href="#submission">Submission</a><a href="#mentors">Mentors</a><a href="#sponsors">Sponsors</a><a href="#faq">FAQ</a>
     </nav>
   </div>
 </footer>
@@ -1542,8 +1562,8 @@ function mentorCard(m,i){
 document.getElementById('mentor-grid').innerHTML = FACILITATORS.concat(MENTORS).map(mentorCard).join('');
 
 /* ---------- ROUTER ---------- */
-const PAGES = ['home','tracks','schedule','prizes','rubric','builder','submission','mentors','sponsors','faq'];
-const TITLES = {home:'FMX AI Hackathon — Oct 20',tracks:'Tracks',builder:'Prompt Builder',schedule:'Schedule',
+const PAGES = ['home','recap','tracks','schedule','prizes','rubric','builder','submission','mentors','sponsors','faq'];
+const TITLES = {home:'FMX AI Hackathon — Oct 20',recap:'Recap',tracks:'Tracks',builder:'Prompt Builder',schedule:'Schedule',
   submission:'Submission',rubric:'Scoring Rubric',mentors:'Mentors',prizes:'Prizes',sponsors:'Sponsors',faq:'FAQ'};
 function route(){
   const raw = (location.hash||'#home').slice(1);
@@ -1556,6 +1576,7 @@ function route(){
     else { id = 'home'; }
   }
   PAGES.forEach(p=>document.getElementById('p-'+p).classList.toggle('on', p===id));
+  if(id!=='recap'){const v=document.getElementById('recap-video');if(v&&!v.paused)v.pause();}
   document.querySelectorAll('nav.links a').forEach(a=>
     a.classList.toggle('on', a.getAttribute('href')==='#'+id));
   document.getElementById('links').classList.remove('open');
